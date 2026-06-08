@@ -1,0 +1,109 @@
+[
+  {
+    "id": "sugar-focus",
+    "name": "Sugar Focus",
+    "oneLineSummary": "幫助使用者管理番茄鐘與待辦任務的前端專注工具",
+    "motivation": "在準備考試和課堂作業期間，我發現自己很難維持長時間的專注。市面上的工具要不太複雜，要不功能太陽春，所以我決定做一個符合自己使用習慣的番茄鐘 + 待辦清單工具。",
+    "problem": "如何建立一個直觀的介面，讓使用者可以在不打斷工作流的情況下快速新增任務、啟動計時器，並追蹤自己的專注時段？",
+    "method": "使用 React 建立元件化介面，以 useState 和 useEffect 管理計時器狀態，搭配 localStorage 持久化任務資料，讓使用者重新整理頁面後資料不會遺失。整體樣式使用 Tailwind CSS 實作響應式設計。",
+    "architecture": "前端單頁應用（SPA），無後端。使用者的任務與設定儲存在瀏覽器的 localStorage，計時器邏輯完全在前端以 setInterval 實作，頁面切換使用 React Router。",
+    "technicalChoices": "選擇 React 是因為元件化設計適合管理計時器、任務列表等多個獨立 UI 狀態；選擇 Tailwind CSS 是因為開發速度快，不需要額外維護 CSS 檔案；不使用後端是為了降低部署複雜度，直接部署到 GitHub Pages。",
+    "challenges": [
+      "一開始不清楚如何在 React 中正確清除 setInterval，導致計時器在元件重新渲染後出現雙重計時的 bug",
+      "Tailwind CSS class 過多時，JSX 可讀性變差，需要拆分元件",
+      "任務資料在 localStorage 序列化時，需要處理 Date 物件的格式問題"
+    ],
+    "solutions": [
+      "使用 useEffect 的 cleanup function 在元件卸載時清除 setInterval",
+      "將重複的 Tailwind class 提取成自定義元件，如 Button、Card 等",
+      "改用 Unix timestamp 儲存時間，避免 JSON 序列化問題"
+    ],
+    "tags": ["React", "Vite", "Tailwind CSS", "Frontend", "localStorage"],
+    "type": "Web Development",
+    "completedAt": "2025-03",
+    "results": [
+      "完成番茄鐘計時器（25分鐘專注 / 5分鐘休息）",
+      "完成待辦任務的新增、完成、刪除功能",
+      "完成響應式設計，支援手機與桌機",
+      "成功部署至 GitHub Pages"
+    ],
+    "futureImprovements": [
+      "加入音效通知，在計時結束時提醒使用者",
+      "加入統計功能，顯示每週專注時數",
+      "加入深色模式切換"
+    ],
+    "screenshot": null,
+    "github": "https://github.com/huiyutseng/sugar-focus",
+    "demo": null,
+    "featured": true
+  },
+  {
+    "id": "python-da-homework",
+    "name": "Python 資料分析作業集",
+    "oneLineSummary": "結合 Pandas、Matplotlib、Seaborn 的資料視覺化與分析作業集",
+    "motivation": "這是資料科學課程的系列作業，目標是熟悉 Python 資料分析生態系，並練習從原始資料到洞察報告的完整流程。",
+    "problem": "如何有效率地清理、分析並視覺化不同結構的資料集，並找出資料中有意義的趨勢？",
+    "method": "使用 Pandas 進行資料清理與轉換，以 Matplotlib 和 Seaborn 繪製統計圖表，在 Jupyter Notebook 中逐步記錄分析過程，確保可重現性。",
+    "architecture": "以 Jupyter Notebook 為主要工作環境，資料從 CSV/Excel 讀入，經過 Pandas DataFrame 處理後，最終輸出視覺化報告。",
+    "technicalChoices": "Jupyter Notebook 適合探索性資料分析，可以即時看到每一步的輸出結果；Seaborn 在 Matplotlib 之上提供了更高層次的統計圖表 API，減少樣板程式碼。",
+    "challenges": [
+      "資料集中存在大量遺失值，需要決定哪些欄位要填補、哪些要刪除",
+      "不同作業的資料格式差異很大，難以建立統一的清理流程"
+    ],
+    "solutions": [
+      "依照欄位的重要性和遺失比例制定不同策略：重要欄位用中位數填補，次要欄位直接刪除",
+      "為每個資料集建立獨立的 notebook，並在開頭記錄資料來源與清理邏輯"
+    ],
+    "tags": ["Python", "Pandas", "Matplotlib", "Seaborn", "Jupyter", "Data Analysis"],
+    "type": "Data Analysis",
+    "completedAt": "2025-06",
+    "results": [
+      "完成 6 份資料分析報告",
+      "分析資料集包含台灣租屋市場、電影票房、學生成績等主題",
+      "視覺化圖表超過 40 張"
+    ],
+    "futureImprovements": [
+      "加入互動式圖表（Plotly / Altair）",
+      "整合成一份完整的資料分析專案報告"
+    ],
+    "screenshot": null,
+    "github": "https://github.com/huiyutseng/python-da-homework-2026",
+    "demo": null,
+    "featured": false
+  },
+  {
+    "id": "auto-portfolio-hub",
+    "name": "Auto Portfolio Hub",
+    "oneLineSummary": "自動化 GitHub 作品集網站，結合 LLM 內容生成與 Playwright 截圖",
+    "motivation": "希望建立一個能夠自動追蹤並展示自己 GitHub 專案的個人品牌頁面，讓面試官、教授、合作夥伴可以快速了解我做過哪些專案。",
+    "problem": "如何讓作品集網站在我每次 push 新專案後，能自動偵測、分析、生成介紹並更新頁面，而不需要手動維護？",
+    "method": "使用 React + Vite + Tailwind CSS 建立前端網站，Python 腳本透過 GitHub API 讀取 repo 資料，配合 LLM 生成專案介紹，Playwright 自動截圖，GitHub Actions 處理 CI/CD 流程。",
+    "architecture": "GitHub Repo → GitHub Actions → Python 分析腳本 → LLM API → projects.json → React 前端 → GitHub Pages",
+    "technicalChoices": "React 適合建立動態作品集頁面；Python 有豐富的 GitHub API 客戶端與資料處理工具；Playwright 支援 headless 截圖；GitHub Actions 可與 repo 緊密整合。",
+    "challenges": [
+      "不是每個 repo 都能自動被啟動（需要 API key、資料庫等），需要設計 fallback 機制",
+      "LLM 可能過度腦補不存在的功能，需要在 prompt 中明確限制"
+    ],
+    "solutions": [
+      "設計多層 fallback：先嘗試啟動 → 讀取 screenshots/ → 使用 demo URL → GitHub 預覽卡片",
+      "Prompt 中要求只根據已有資料描述，不捏造數據，並先輸出 draft 讓人工確認"
+    ],
+    "tags": ["React", "Python", "GitHub Actions", "Playwright", "LLM", "CI/CD", "Automation"],
+    "type": "Automation",
+    "completedAt": "2026-06",
+    "results": [
+      "完成 MVP 前端網站（首頁、專案列表、專案詳細頁）",
+      "實作 Python GitHub repo 分析腳本",
+      "設計自動化 CI/CD 部署流程"
+    ],
+    "futureImprovements": [
+      "加入 Playwright 自動截圖",
+      "整合 LLM 自動生成專案介紹",
+      "完成全自動化 GitHub Actions 工作流程"
+    ],
+    "screenshot": null,
+    "github": "https://github.com/huiyutseng/personal_page",
+    "demo": "https://huiyutseng.github.io/personal_page",
+    "featured": true
+  }
+]
