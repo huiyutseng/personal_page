@@ -12,11 +12,11 @@ export const projects: Project[] = [
   {
     id: 'life-insight-ai',
     category: 'Data & Systems',
-    name: 'Life Insight AI',
+    name: 'youtube comment sentimental analysis',
     summary: 'Emotion Tracking · Streamlit · Data Visualization',
     tags: ['Streamlit', 'Python', 'Data Visualization', 'Emotion AI'],
     image: '/images/life-insight-ai.png',
-    github: 'https://github.com/huiyutseng/life-insight-ai',
+    github: 'https://github.com/huiyutseng/youtube_comment',
     demo: undefined,
     featured: true,
     detail: {
