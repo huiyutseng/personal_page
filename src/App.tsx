@@ -1,18 +1,22 @@
-import { Routes, Route } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
+import Footer from './components/Footer'
 import Navbar from './components/Navbar'
+import SparkleTrail from './components/SparkleTrail'
+import StarCursor from './components/StarCursor'
 import Home from './pages/Home'
-import Projects from './pages/Projects'
 import ProjectDetail from './pages/ProjectDetail'
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-slate-900 text-white">
+    <div className="min-h-screen bg-navy-black text-ink-dark">
+      <StarCursor />
+      <SparkleTrail />
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/projects" element={<Projects />} />
         <Route path="/projects/:id" element={<ProjectDetail />} />
       </Routes>
+      <Footer />
     </div>
   )
 }

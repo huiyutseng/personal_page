@@ -1,0 +1,185 @@
+@import "tailwindcss";
+
+/* -------------------------------------------------------------------------
+   Signal Garden｜微光訊號花園 — design tokens
+   All colors are managed as CSS variables here, then re-exposed to Tailwind
+   via @theme so utilities like bg-navy-deep / text-gold / font-serif-en work.
+   ------------------------------------------------------------------------- */
+:root {
+  /* backgrounds */
+  --color-navy-deep: #07182d;
+  --color-navy-black: #04101f;
+  --color-navy-card: #0c2138;
+
+  /* light blocks */
+  --color-cream: #f7f3ec;
+  --color-cream-light: #fffdf8;
+
+  /* accents */
+  --color-lavender: #b8a7d9;
+  --color-lavender-pink: #d8c4e8;
+  --color-pink-soft: #f2b8c1;
+  --color-gold: #d8b46a;
+  --color-gold-warm: #c89555;
+
+  /* text: "ink-dark" = text sitting on a dark navy background,
+           "ink-light" = text sitting on a cream/light background */
+  --color-ink-dark: #f7f3ec;
+  --color-ink-dark-soft: #c9c6c2;
+  --color-ink-light: #172033;
+  --color-ink-light-soft: #65616a;
+}
+
+@theme inline {
+  --color-navy-deep: var(--color-navy-deep);
+  --color-navy-black: var(--color-navy-black);
+  --color-navy-card: var(--color-navy-card);
+
+  --color-cream: var(--color-cream);
+  --color-cream-light: var(--color-cream-light);
+
+  --color-lavender: var(--color-lavender);
+  --color-lavender-pink: var(--color-lavender-pink);
+  --color-pink-soft: var(--color-pink-soft);
+  --color-gold: var(--color-gold);
+  --color-gold-warm: var(--color-gold-warm);
+
+  --color-ink-dark: var(--color-ink-dark);
+  --color-ink-dark-soft: var(--color-ink-dark-soft);
+  --color-ink-light: var(--color-ink-light);
+  --color-ink-light-soft: var(--color-ink-light-soft);
+
+  --font-serif-en: "Cormorant Garamond", "Playfair Display", "Noto Serif TC", serif;
+  --font-display: "Playfair Display", "Cormorant Garamond", "Noto Serif TC", serif;
+  --font-serif-tc: "Noto Serif TC", "Cormorant Garamond", serif;
+  --font-sans-tc: "Noto Sans TC", "Inter", system-ui, sans-serif;
+
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-twinkle: twinkle 3.2s ease-in-out infinite;
+  --animate-drift: drift 14s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.25; transform: scale(0.85); }
+  50% { opacity: 1; transform: scale(1.15); }
+}
+
+@keyframes drift {
+  0% { transform: translate(0, 0); opacity: 0; }
+  10% { opacity: 0.8; }
+  50% { transform: translate(6px, -22px); opacity: 1; }
+  90% { opacity: 0.6; }
+  100% { transform: translate(-4px, -44px); opacity: 0; }
+}
+
+@keyframes dash {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes sparklePop {
+  0% {
+    transform: translate(0, 0) scale(0) rotate(var(--r0, 0deg));
+    opacity: 1;
+  }
+  30% {
+    transform: translate(calc(var(--dx, 0px) * 0.35), calc(var(--dy, 0px) * 0.35)) scale(1)
+      rotate(var(--r1, 20deg));
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--dx, 0px), var(--dy, 0px)) scale(0.35) rotate(var(--r2, 60deg));
+    opacity: 0;
+  }
+}
+
+.spark-particle {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 99998;
+  will-change: transform, opacity;
+  animation-name: sparklePop;
+  animation-timing-function: ease-out;
+  animation-fill-mode: forwards;
+}
+.spark-dot {
+  border-radius: 9999px;
+}
+.spark-star {
+  clip-path: polygon(50% 0%, 61% 39%, 100% 50%, 61% 61%, 50% 100%, 39% 61%, 0% 50%, 39% 39%);
+}
+.spark-cross {
+  clip-path: polygon(
+    42% 0%, 58% 0%, 58% 42%, 100% 42%, 100% 58%, 58% 58%,
+    58% 100%, 42% 100%, 42% 58%, 0% 58%, 0% 42%, 42% 42%
+  );
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 88px;
+}
+
+body {
+  margin: 0;
+  background: var(--color-navy-black);
+  color: var(--color-ink-dark);
+  font-family: var(--font-sans-tc);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--color-gold);
+  color: var(--color-navy-black);
+}
+
+/* Custom star cursor: only on devices with a precise pointer that supports
+   hover (i.e. a real mouse/trackpad). Touch and coarse pointers keep the
+   system default so nothing breaks on mobile/tablet. */
+@media (pointer: fine) and (hover: hover) {
+  body,
+  a,
+  button,
+  [role="button"],
+  summary {
+    cursor: none;
+  }
+
+  input,
+  textarea,
+  select,
+  [contenteditable="true"] {
+    cursor: text;
+  }
+}
+
+.focus-ring {
+  outline: none;
+}
+.focus-ring:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
