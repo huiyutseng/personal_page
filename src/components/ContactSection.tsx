@@ -4,6 +4,7 @@ import { site } from '../data/site'
 import { fadeUpInView } from '../lib/motion'
 import FloralDecoration from './FloralDecoration'
 import ImageWithFallback from './ImageWithFallback'
+import MagneticButton from './MagneticButton'
 
 const LINKS = [
   { icon: Mail, label: site.contact.email, href: `mailto:${site.contact.email}` },
@@ -56,7 +57,7 @@ export default function ContactSection() {
               ))}
             </ul>
 
-            <a
+            <MagneticButton
               href={site.contact.resumePath}
               download
               data-cursor-hover
@@ -64,7 +65,7 @@ export default function ContactSection() {
             >
               {site.contact.resumeLabel}
               <Download className="h-4 w-4" strokeWidth={1.75} />
-            </a>
+            </MagneticButton>
           </div>
 
           <div className="flex flex-wrap items-end justify-center gap-4 rounded-2xl border border-lavender/15 bg-navy-deep/95 p-6">

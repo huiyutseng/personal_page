@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { motion } from 'framer-motion'
 import { Menu, Sparkles, X } from 'lucide-react'
 import { site } from '../data/site'
 
@@ -63,31 +64,6 @@ export default function Navbar() {
           <span className="font-serif-en text-lg tracking-wide text-ink-dark">{site.brand}</span>
         </a>
 
-        <ul className="hidden items-center gap-9 md:flex">
-          {site.nav.map((item) => (
-            <li key={item.id} className="relative">
-              <a
-                href={`#${item.id}`}
-                data-cursor-hover
-                onClick={(e) => {
-                  e.preventDefault()
-                  goTo(item.id)
-                }}
-                className={`focus-ring group relative py-2 font-sans-tc text-sm tracking-wide transition-colors duration-300 ${
-                  activeId === item.id ? 'text-gold' : 'text-ink-dark-soft hover:text-ink-dark'
-                }`}
-              >
-                {item.label}
-                <span
-                  className={`absolute -bottom-0.5 left-1/2 h-px -translate-x-1/2 bg-gold transition-all duration-300 ${
-                    activeId === item.id ? 'w-full' : 'w-0 group-hover:w-2/3'
-                  }`}
-                />
-              </a>
-            </li>
-          ))}
-        </ul>
-
         <div className="hidden md:block">
           <a
             href="#contact"
@@ -114,8 +90,39 @@ export default function Navbar() {
         </button>
       </nav>
 
+      {/* section pager — jump between sections instead of scrolling through them */}
+      <div className={`flex justify-center px-5 pb-3 sm:px-8 ${menuOpen ? 'hidden md:flex' : 'flex'}`}>
+        <div className="flex flex-wrap items-center justify-center gap-1 rounded-full border border-lavender/20 bg-navy-card/60 p-1 backdrop-blur-md">
+          {site.nav.map((item) => (
+            <button
+              key={item.id}
+              type="button"
+              data-cursor-hover
+              aria-current={activeId === item.id ? 'true' : undefined}
+              onClick={() => goTo(item.id)}
+              className="focus-ring relative rounded-full px-3 py-1.5 font-sans-tc text-xs tracking-wide transition-colors duration-300 sm:px-4 sm:text-sm"
+            >
+              {activeId === item.id && (
+                <motion.span
+                  layoutId="section-pager-pill"
+                  className="absolute inset-0 rounded-full bg-gold"
+                  transition={{ type: 'spring', stiffness: 350, damping: 30 }}
+                />
+              )}
+              <span
+                className={`relative z-10 ${
+                  activeId === item.id ? 'text-navy-black' : 'text-ink-dark-soft hover:text-ink-dark'
+                }`}
+              >
+                {item.label}
+              </span>
+            </button>
+          ))}
+        </div>
+      </div>
+
       {menuOpen && (
-        <div className="fixed inset-0 top-20 z-[8999] flex flex-col bg-navy-black/98 px-8 py-10 backdrop-blur-lg md:hidden">
+        <div className="fixed inset-0 top-20 z-[8999] flex flex-col bg-navy-black/92 px-8 py-10 backdrop-blur-md md:hidden">
           <ul className="flex flex-1 flex-col items-center justify-center gap-8">
             {site.nav.map((item) => (
               <li key={item.id}>

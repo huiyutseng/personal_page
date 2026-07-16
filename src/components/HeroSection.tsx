@@ -5,6 +5,7 @@ import { fadeUp as fadeUpBase } from '../lib/motion'
 import FloatingParticles from './FloatingParticles'
 import FloralDecoration from './FloralDecoration'
 import ImageWithFallback from './ImageWithFallback'
+import MagneticButton from './MagneticButton'
 
 export default function HeroSection() {
   const reduceMotion = useReducedMotion()
@@ -13,7 +14,7 @@ export default function HeroSection() {
   return (
     <section
       id="home"
-      className="relative flex min-h-[92vh] items-center overflow-hidden bg-navy-deep pt-24"
+      className="relative flex min-h-[92vh] items-center overflow-hidden bg-navy-deep pt-36"
     >
       {/* ambient background */}
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_75%_20%,rgba(184,167,217,0.16),transparent),radial-gradient(ellipse_50%_40%_at_10%_85%,rgba(216,180,106,0.10),transparent)]" />
@@ -69,7 +70,7 @@ export default function HeroSection() {
             {...fadeUp(0.32)}
             className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center lg:justify-start"
           >
-            <a
+            <MagneticButton
               href="#projects"
               data-cursor-hover
               onClick={(e) => {
@@ -80,8 +81,8 @@ export default function HeroSection() {
             >
               {site.hero.ctaPrimary}
               <Sparkles className="h-4 w-4 transition-transform duration-300 group-hover:rotate-45" strokeWidth={1.75} />
-            </a>
-            <a
+            </MagneticButton>
+            <MagneticButton
               href="#about"
               data-cursor-hover
               onClick={(e) => {
@@ -91,7 +92,7 @@ export default function HeroSection() {
               className="focus-ring inline-flex items-center gap-2 rounded-full border border-gold/50 px-7 py-3 font-sans-tc text-sm font-medium text-ink-dark transition-all duration-300 hover:border-gold hover:bg-gold/10 active:scale-95"
             >
               {site.hero.ctaSecondary}
-            </a>
+            </MagneticButton>
           </motion.div>
         </div>
 
