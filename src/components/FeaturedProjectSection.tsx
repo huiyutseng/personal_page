@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { featuredProject } from '../data/projects'
 import { site } from '../data/site'
 import { fadeUpInView } from '../lib/motion'
+import FloatingParticles from './FloatingParticles'
 import ImageWithFallback from './ImageWithFallback'
 
 const BLOCKS = [
@@ -17,7 +18,8 @@ export default function FeaturedProjectSection() {
 
   return (
     <section className="relative bg-navy-black px-5 py-24 sm:px-8 lg:py-32">
-      <div className="mx-auto max-w-6xl">
+      <FloatingParticles count={16} />
+      <div className="relative mx-auto max-w-6xl">
         <motion.div
           {...fadeUpInView(0, reduceMotion)}
           className="grid grid-cols-1 gap-10 rounded-[20px] border border-gold/20 bg-cream p-6 shadow-[0_30px_70px_-30px_rgba(4,16,31,0.6)] sm:p-10 lg:grid-cols-2 lg:gap-14 lg:p-14"

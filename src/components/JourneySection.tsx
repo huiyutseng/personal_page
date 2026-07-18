@@ -3,6 +3,7 @@ import { BrainCircuit, GraduationCap, Landmark, Globe2, ShieldCheck, Sparkles, t
 import { journey } from '../data/journey'
 import { site } from '../data/site'
 import { fadeUpInView } from '../lib/motion'
+import FloatingParticles from './FloatingParticles'
 
 const ICONS: Record<string, LucideIcon> = {
   ShieldCheck,
@@ -19,6 +20,7 @@ export default function JourneySection() {
   return (
     <section id="journey" className="relative overflow-hidden bg-navy-deep px-5 py-24 sm:px-8 lg:py-32">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_50%_40%_at_50%_0%,rgba(216,180,106,0.08),transparent)]" />
+      <FloatingParticles count={16} />
 
       <div className="relative mx-auto max-w-6xl">
         <motion.div {...fadeUpInView(0, reduceMotion)} className="text-center">

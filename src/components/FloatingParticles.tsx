@@ -22,7 +22,7 @@ const COLORS = ['#F7F3EC', '#D8B46A', '#B8A7D9', '#F2B8C1']
  * Purely CSS-driven (no three.js) and cheap enough to leave mounted;
  * respects prefers-reduced-motion globally via globals.css.
  */
-export default function FloatingParticles({ count = 22, className = '' }: FloatingParticlesProps) {
+export default function FloatingParticles({ count = 22, className = 'absolute inset-0' }: FloatingParticlesProps) {
   const dots = useMemo<Dot[]>(() => {
     return Array.from({ length: count }, (_, i) => ({
       left: Math.random() * 100,
@@ -36,7 +36,7 @@ export default function FloatingParticles({ count = 22, className = '' }: Floati
   }, [count])
 
   return (
-    <div className={`pointer-events-none absolute inset-0 overflow-hidden ${className}`} aria-hidden="true">
+    <div className={`pointer-events-none overflow-hidden ${className}`} aria-hidden="true">
       {dots.map((dot, i) => (
         <span
           key={i}

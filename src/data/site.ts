@@ -2,7 +2,7 @@
 // Update the values below to personalize the site — no component edits needed.
 
 export const site = {
-  brand: 'Signal Garden',
+  brand: 'Huiyu Personal Page',
   brandZh: '微光訊號花園',
 
   nav: [
@@ -77,7 +77,4 @@ export const site = {
     devicePreviewImage: '/images/device-preview.png',
   },
 
-  footer: {
-    copyright: `© ${new Date().getFullYear()} Huiyu. All rights reserved.`,
-  },
 } as const

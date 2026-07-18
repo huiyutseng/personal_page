@@ -9,7 +9,6 @@ export default function Footer() {
           <Sparkles className="h-3.5 w-3.5 text-gold" strokeWidth={1.5} />
           {site.brand}
         </span>
-        <p className="font-sans-tc text-xs text-ink-dark-soft">{site.footer.copyright}</p>
       </div>
     </footer>
   )

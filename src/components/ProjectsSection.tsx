@@ -5,6 +5,7 @@ import { site } from '../data/site'
 import type { ProjectCategory } from '../data/types'
 import { fadeUpInView } from '../lib/motion'
 import ProjectCard from './ProjectCard'
+import FloatingParticles from './FloatingParticles'
 
 export default function ProjectsSection() {
   const reduceMotion = Boolean(useReducedMotion())
@@ -13,7 +14,8 @@ export default function ProjectsSection() {
 
   return (
     <section id="projects" className="relative bg-navy-black px-5 py-24 sm:px-8 lg:py-32">
-      <div className="mx-auto max-w-6xl">
+      <FloatingParticles count={16} />
+      <div className="relative mx-auto max-w-6xl">
         <motion.div {...fadeUpInView(0, reduceMotion)} className="text-center">
           <h2 className="font-serif-en text-4xl font-medium text-ink-dark sm:text-5xl">{site.projects.title}</h2>
           <div className="mx-auto mt-3 h-px w-16 bg-gold" />

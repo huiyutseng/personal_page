@@ -16,6 +16,13 @@ export default function Navbar() {
   }, [])
 
   useEffect(() => {
+    document.body.style.overflow = menuOpen ? 'hidden' : ''
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [menuOpen])
+
+  useEffect(() => {
     const sections = site.nav
       .map((item) => document.getElementById(item.id))
       .filter((el): el is HTMLElement => Boolean(el))
@@ -42,82 +49,84 @@ export default function Navbar() {
   }
 
   return (
-    <header
-      className={`fixed inset-x-0 top-0 z-[9000] transition-colors duration-500 ${
-        scrolled ? 'bg-navy-black/80 backdrop-blur-md border-b border-gold/10' : 'bg-transparent'
-      }`}
-    >
-      <nav className="mx-auto flex h-20 max-w-6xl items-center justify-between px-5 sm:px-8">
-        <a
-          href="#home"
-          onClick={(e) => {
-            e.preventDefault()
-            goTo('home')
-          }}
-          className="focus-ring flex items-center gap-2.5"
-          data-cursor-hover
-        >
-          <span className="relative flex h-7 w-7 items-center justify-center rounded-full border border-gold/60">
-            <span className="absolute inset-0 animate-[spin_16s_linear_infinite] rounded-full border border-dashed border-lavender/50" />
-            <Sparkles className="h-3.5 w-3.5 text-gold" strokeWidth={1.5} />
-          </span>
-          <span className="font-serif-en text-lg tracking-wide text-ink-dark">{site.brand}</span>
-        </a>
-
-        <div className="hidden md:block">
+    <header className="fixed inset-x-0 top-0 z-[9000]">
+      <div
+        className={`transition-colors duration-500 ${
+          scrolled ? 'bg-navy-black/80 backdrop-blur-md border-b border-gold/10' : 'bg-transparent'
+        }`}
+      >
+        <nav className="mx-auto flex h-20 max-w-6xl items-center justify-between px-5 sm:px-8">
           <a
-            href="#contact"
-            data-cursor-hover
+            href="#home"
             onClick={(e) => {
               e.preventDefault()
-              goTo('contact')
+              goTo('home')
             }}
-            className="focus-ring group inline-flex items-center gap-2 rounded-full border border-lavender/50 bg-lavender/10 px-5 py-2 text-sm text-ink-dark transition-all duration-300 hover:border-gold hover:bg-gold/10 hover:text-gold active:scale-95"
+            className="focus-ring flex items-center gap-2.5"
+            data-cursor-hover
           >
-            Let&apos;s Connect
-            <Sparkles className="h-3.5 w-3.5 transition-transform duration-300 group-hover:rotate-45" strokeWidth={1.5} />
+            <span className="relative flex h-7 w-7 items-center justify-center rounded-full border border-gold/60">
+              <span className="absolute inset-0 animate-[spin_16s_linear_infinite] rounded-full border border-dashed border-lavender/50" />
+              <Sparkles className="h-3.5 w-3.5 text-gold" strokeWidth={1.5} />
+            </span>
+            <span className="font-serif-en text-lg tracking-wide text-ink-dark">{site.brand}</span>
           </a>
-        </div>
 
-        <button
-          type="button"
-          className="focus-ring inline-flex items-center justify-center rounded-full p-2 text-ink-dark md:hidden"
-          aria-label={menuOpen ? '關閉選單' : '開啟選單'}
-          aria-expanded={menuOpen}
-          onClick={() => setMenuOpen((v) => !v)}
-        >
-          {menuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-        </button>
-      </nav>
-
-      {/* section pager — jump between sections instead of scrolling through them */}
-      <div className={`flex justify-center px-5 pb-3 sm:px-8 ${menuOpen ? 'hidden md:flex' : 'flex'}`}>
-        <div className="flex flex-wrap items-center justify-center gap-1 rounded-full border border-lavender/20 bg-navy-card/60 p-1 backdrop-blur-md">
-          {site.nav.map((item) => (
-            <button
-              key={item.id}
-              type="button"
+          <div className="hidden md:block">
+            <a
+              href="#contact"
               data-cursor-hover
-              aria-current={activeId === item.id ? 'true' : undefined}
-              onClick={() => goTo(item.id)}
-              className="focus-ring relative rounded-full px-3 py-1.5 font-sans-tc text-xs tracking-wide transition-colors duration-300 sm:px-4 sm:text-sm"
+              onClick={(e) => {
+                e.preventDefault()
+                goTo('contact')
+              }}
+              className="focus-ring group inline-flex items-center gap-2 rounded-full border border-lavender/50 bg-lavender/10 px-5 py-2 text-sm text-ink-dark transition-all duration-300 hover:border-gold hover:bg-gold/10 hover:text-gold active:scale-95"
             >
-              {activeId === item.id && (
-                <motion.span
-                  layoutId="section-pager-pill"
-                  className="absolute inset-0 rounded-full bg-gold"
-                  transition={{ type: 'spring', stiffness: 350, damping: 30 }}
-                />
-              )}
-              <span
-                className={`relative z-10 ${
-                  activeId === item.id ? 'text-navy-black' : 'text-ink-dark-soft hover:text-ink-dark'
-                }`}
+              Let&apos;s Connect
+              <Sparkles className="h-3.5 w-3.5 transition-transform duration-300 group-hover:rotate-45" strokeWidth={1.5} />
+            </a>
+          </div>
+
+          <button
+            type="button"
+            className="focus-ring inline-flex items-center justify-center rounded-full p-2 text-ink-dark md:hidden"
+            aria-label={menuOpen ? '關閉選單' : '開啟選單'}
+            aria-expanded={menuOpen}
+            onClick={() => setMenuOpen((v) => !v)}
+          >
+            {menuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
+        </nav>
+
+        {/* section pager — jump between sections instead of scrolling through them */}
+        <div className={`flex justify-center px-5 pb-3 sm:px-8 ${menuOpen ? 'hidden md:flex' : 'flex'}`}>
+          <div className="flex flex-wrap items-center justify-center gap-1 rounded-full border border-lavender/20 bg-navy-card/60 p-1 backdrop-blur-md">
+            {site.nav.map((item) => (
+              <button
+                key={item.id}
+                type="button"
+                data-cursor-hover
+                aria-current={activeId === item.id ? 'true' : undefined}
+                onClick={() => goTo(item.id)}
+                className="focus-ring relative rounded-full px-3 py-1.5 font-sans-tc text-xs tracking-wide transition-colors duration-300 sm:px-4 sm:text-sm"
               >
-                {item.label}
-              </span>
-            </button>
-          ))}
+                {activeId === item.id && (
+                  <motion.span
+                    layoutId="section-pager-pill"
+                    className="absolute inset-0 rounded-full bg-gold"
+                    transition={{ type: 'spring', stiffness: 350, damping: 30 }}
+                  />
+                )}
+                <span
+                  className={`relative z-10 ${
+                    activeId === item.id ? 'text-navy-black' : 'text-ink-dark-soft hover:text-ink-dark'
+                  }`}
+                >
+                  {item.label}
+                </span>
+              </button>
+            ))}
+          </div>
         </div>
       </div>
 
