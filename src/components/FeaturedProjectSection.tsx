@@ -6,6 +6,7 @@ import { site } from '../data/site'
 import { fadeUpInView } from '../lib/motion'
 import FloatingParticles from './FloatingParticles'
 import ImageWithFallback from './ImageWithFallback'
+import ParallaxLayer from './ParallaxLayer'
 
 const BLOCKS = [
   { key: 'problem', label: 'The Problem', icon: CircleHelp } as const,
@@ -17,8 +18,10 @@ export default function FeaturedProjectSection() {
   const reduceMotion = Boolean(useReducedMotion())
 
   return (
-    <section className="relative bg-navy-black px-5 py-24 sm:px-8 lg:py-32">
-      <FloatingParticles count={16} />
+    <section className="relative overflow-hidden bg-navy-black px-5 py-24 sm:px-8 lg:py-32">
+      <ParallaxLayer offset={40} className="pointer-events-none absolute inset-0">
+        <FloatingParticles count={16} className="absolute inset-0" />
+      </ParallaxLayer>
       <div className="relative mx-auto max-w-6xl">
         <motion.div
           {...fadeUpInView(0, reduceMotion)}

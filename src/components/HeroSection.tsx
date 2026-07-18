@@ -6,6 +6,7 @@ import FloatingParticles from './FloatingParticles'
 import FloralDecoration from './FloralDecoration'
 import ImageWithFallback from './ImageWithFallback'
 import MagneticButton from './MagneticButton'
+import ParallaxLayer from './ParallaxLayer'
 
 export default function HeroSection() {
   const reduceMotion = useReducedMotion()
@@ -16,25 +17,27 @@ export default function HeroSection() {
       id="home"
       className="relative flex min-h-[92vh] items-center overflow-hidden bg-navy-deep pt-36"
     >
-      {/* ambient background */}
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_75%_20%,rgba(184,167,217,0.16),transparent),radial-gradient(ellipse_50%_40%_at_10%_85%,rgba(216,180,106,0.10),transparent)]" />
-      <FloatingParticles count={26} />
-      <svg className="pointer-events-none absolute inset-0 h-full w-full opacity-40" aria-hidden="true">
-        <path
-          d="M40 60 C 200 140, 120 320, 320 380 S 560 520, 680 640"
-          fill="none"
-          stroke="#D8B46A"
-          strokeWidth="1"
-          strokeLinecap="round"
-          opacity="0.35"
+      {/* ambient background — drifts slightly on scroll for a sense of depth */}
+      <ParallaxLayer offset={50} className="pointer-events-none absolute inset-0">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_75%_20%,rgba(184,167,217,0.16),transparent),radial-gradient(ellipse_50%_40%_at_10%_85%,rgba(216,180,106,0.10),transparent)]" />
+        <FloatingParticles count={26} />
+        <svg className="absolute inset-0 h-full w-full opacity-40" aria-hidden="true">
+          <path
+            d="M40 60 C 200 140, 120 320, 320 380 S 560 520, 680 640"
+            fill="none"
+            stroke="#D8B46A"
+            strokeWidth="1"
+            strokeLinecap="round"
+            opacity="0.35"
+          />
+        </svg>
+        <FloralDecoration tone="lavender" className="absolute -left-6 bottom-0 h-56 w-56 opacity-70" />
+        <FloralDecoration
+          tone="gold"
+          flip
+          className="absolute right-0 top-16 hidden h-44 w-44 opacity-50 md:block"
         />
-      </svg>
-      <FloralDecoration tone="lavender" className="pointer-events-none absolute -left-6 bottom-0 h-56 w-56 opacity-70" />
-      <FloralDecoration
-        tone="gold"
-        flip
-        className="pointer-events-none absolute right-0 top-16 hidden h-44 w-44 opacity-50 md:block"
-      />
+      </ParallaxLayer>
 
       <div className="relative mx-auto grid w-full max-w-6xl grid-cols-1 items-center gap-14 px-5 sm:px-8 lg:grid-cols-[1.05fr_0.95fr] lg:gap-10">
         {/* left column */}

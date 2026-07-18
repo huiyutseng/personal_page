@@ -6,6 +6,7 @@ import FloatingParticles from './FloatingParticles'
 import FloralDecoration from './FloralDecoration'
 import ImageWithFallback from './ImageWithFallback'
 import MagneticButton from './MagneticButton'
+import ParallaxLayer from './ParallaxLayer'
 
 const LINKS = [
   { icon: Mail, label: site.contact.email, href: `mailto:${site.contact.email}` },
@@ -23,8 +24,10 @@ export default function ContactSection() {
   const reduceMotion = Boolean(useReducedMotion())
 
   return (
-    <section id="contact" className="relative bg-navy-black px-5 py-24 sm:px-8 lg:py-32">
-      <FloatingParticles count={16} />
+    <section id="contact" className="relative overflow-hidden bg-navy-black px-5 py-24 sm:px-8 lg:py-32">
+      <ParallaxLayer offset={40} className="pointer-events-none absolute inset-0">
+        <FloatingParticles count={16} className="absolute inset-0" />
+      </ParallaxLayer>
       <div className="relative mx-auto max-w-6xl">
         <motion.div
           {...fadeUpInView(0, reduceMotion)}

@@ -4,6 +4,7 @@ import { site } from '../data/site'
 import { fadeUpInView } from '../lib/motion'
 import FloralDecoration from './FloralDecoration'
 import FloatingParticles from './FloatingParticles'
+import ParallaxLayer from './ParallaxLayer'
 
 const ICONS: Record<string, LucideIcon> = { Eye, Brain, Sprout }
 
@@ -11,8 +12,10 @@ export default function AboutSection() {
   const reduceMotion = Boolean(useReducedMotion())
 
   return (
-    <section id="about" className="relative bg-navy-deep px-5 py-24 sm:px-8 lg:py-32">
-      <FloatingParticles count={16} />
+    <section id="about" className="relative overflow-hidden bg-navy-deep px-5 py-24 sm:px-8 lg:py-32">
+      <ParallaxLayer offset={40} className="pointer-events-none absolute inset-0">
+        <FloatingParticles count={16} className="absolute inset-0" />
+      </ParallaxLayer>
       <div className="relative mx-auto max-w-5xl">
         <motion.div
           {...fadeUpInView(0, reduceMotion)}

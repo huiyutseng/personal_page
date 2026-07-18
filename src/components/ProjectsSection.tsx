@@ -6,6 +6,7 @@ import type { ProjectCategory } from '../data/types'
 import { fadeUpInView } from '../lib/motion'
 import ProjectCard from './ProjectCard'
 import FloatingParticles from './FloatingParticles'
+import ParallaxLayer from './ParallaxLayer'
 
 // how close to the edge (px) the cursor must be to trigger auto-scroll
 const EDGE_ZONE = 90
@@ -57,8 +58,10 @@ export default function ProjectsSection() {
   }
 
   return (
-    <section id="projects" className="relative bg-navy-black px-5 py-24 sm:px-8 lg:py-32">
-      <FloatingParticles count={16} />
+    <section id="projects" className="relative overflow-hidden bg-navy-black px-5 py-24 sm:px-8 lg:py-32">
+      <ParallaxLayer offset={40} className="pointer-events-none absolute inset-0">
+        <FloatingParticles count={16} className="absolute inset-0" />
+      </ParallaxLayer>
       <div className="relative mx-auto max-w-6xl">
         <motion.div {...fadeUpInView(0, reduceMotion)} className="text-center">
           <h2 className="font-serif-en text-4xl font-medium text-ink-dark sm:text-5xl">{site.projects.title}</h2>
