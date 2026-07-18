@@ -6,7 +6,7 @@ import ImageWithFallback from './ImageWithFallback'
 
 export default function ProjectCard({ project }: { project: Project }) {
   return (
-    <motion.div layout className="group relative">
+    <motion.div layout className="group relative h-full">
       <Link
         to={`/projects/${project.id}`}
         data-cursor-hover
