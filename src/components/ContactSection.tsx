@@ -1,6 +1,7 @@
 import { motion, useReducedMotion } from 'framer-motion'
 import { Bird, Briefcase, Code2, Download, Mail } from 'lucide-react'
-import { site } from '../data/site'
+import { site, siteShared } from '../data/site'
+import { useLanguage } from '../i18n/LanguageContext'
 import { fadeUpInView } from '../lib/motion'
 import FloatingParticles from './FloatingParticles'
 import FloralDecoration from './FloralDecoration'
@@ -11,18 +12,20 @@ import ScrollFlower from './ScrollFlower'
 import ScrollPlanet from './ScrollPlanet'
 
 const LINKS = [
-  { icon: Mail, label: site.contact.email, href: `mailto:${site.contact.email}` },
-  { icon: Code2, label: site.contact.github, href: site.contact.githubUrl },
-  { icon: Briefcase, label: site.contact.linkedin, href: site.contact.linkedinUrl },
+  { icon: Mail, label: siteShared.contact.email, href: `mailto:${siteShared.contact.email}` },
+  { icon: Code2, label: siteShared.contact.github, href: siteShared.contact.githubUrl },
+  { icon: Briefcase, label: siteShared.contact.linkedin, href: siteShared.contact.linkedinUrl },
 ]
 
 const DEVICES = [
-  { name: 'Desktop', className: 'aspect-[16/10] w-full' },
-  { name: 'Tablet', className: 'aspect-[4/3] w-2/3' },
-  { name: 'Mobile', className: 'aspect-[9/16] w-1/3' },
+  { className: 'aspect-[16/10] w-full' },
+  { className: 'aspect-[4/3] w-2/3' },
+  { className: 'aspect-[9/16] w-1/3' },
 ]
 
 export default function ContactSection() {
+  const { locale } = useLanguage()
+  const copy = site[locale]
   const reduceMotion = Boolean(useReducedMotion())
 
   return (
@@ -42,8 +45,8 @@ export default function ContactSection() {
             </ScrollFlower>
             <Bird className="absolute bottom-0 left-2 h-8 w-8 text-ink-light-soft/70" strokeWidth={1.25} />
 
-            <h2 className="font-serif-en text-4xl font-medium text-ink-light sm:text-5xl">{site.contact.title}</h2>
-            <p className="mt-3 font-serif-en text-lg italic text-ink-light-soft">{site.contact.subtitle}</p>
+            <h2 className="font-serif-en text-4xl font-medium text-ink-light sm:text-5xl">{copy.contact.title}</h2>
+            <p className="mt-3 font-serif-en text-lg italic text-ink-light-soft">{copy.contact.subtitle}</p>
 
             <ul className="mt-8 space-y-4">
               {LINKS.map(({ icon: Icon, label, href }) => (
@@ -65,29 +68,29 @@ export default function ContactSection() {
             </ul>
 
             <MagneticButton
-              href={site.contact.resumePath}
+              href={siteShared.contact.resumePath}
               download
               data-cursor-hover
               className="focus-ring mt-9 inline-flex items-center gap-2 rounded-full bg-lavender px-6 py-3 font-sans-tc text-sm font-medium text-navy-black transition-all duration-300 hover:bg-lavender-pink active:scale-95"
             >
-              {site.contact.resumeLabel}
+              {copy.contact.resumeLabel}
               <Download className="h-4 w-4" strokeWidth={1.75} />
             </MagneticButton>
           </div>
 
           <div className="flex flex-wrap items-end justify-center gap-4 rounded-2xl border border-lavender/15 bg-navy-deep/95 p-6">
-            {DEVICES.map((device) => (
-              <div key={device.name} className={`${device.className} min-w-[64px]`}>
+            {DEVICES.map((device, index) => (
+              <div key={copy.contact.deviceNames[index]} className={`${device.className} min-w-[64px]`}>
                 <div className="overflow-hidden rounded-lg border border-gold/25 bg-navy-card shadow-lg">
                   <ImageWithFallback
-                    src={site.contact.devicePreviewImage}
-                    alt={`${device.name} 版面預覽`}
+                    src={siteShared.contact.devicePreviewImage}
+                    alt={`${copy.contact.deviceNames[index]} ${copy.contact.previewAlt}`}
                     className="h-full w-full object-cover"
                     fallbackClassName="h-full w-full"
                   />
                 </div>
                 <p className="mt-2 text-center font-sans-tc text-[11px] tracking-wide text-ink-dark-soft">
-                  {device.name}
+                  {copy.contact.deviceNames[index]}
                 </p>
               </div>
             ))}

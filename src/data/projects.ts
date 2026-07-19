@@ -1,4 +1,10 @@
-import type { Project, ProjectCategory } from './types'
+import type { Locale } from '../i18n/types'
+import type {
+  LocalizedProject,
+  Project,
+  ProjectCategory,
+  ProjectContent,
+} from './types'
 
 export const PROJECT_CATEGORIES: ProjectCategory[] = [
   'Data & Systems',
@@ -6,7 +12,9 @@ export const PROJECT_CATEGORIES: ProjectCategory[] = [
   'Creative Experiments',
 ]
 
-export const projects: Project[] = [
+type ProjectSeed = Omit<Project, 'content'> & ProjectContent
+
+const projectSeeds: ProjectSeed[] = [
   {
     id: 'youtube-comment-sentiment',
     category: 'Data & Systems',
@@ -280,4 +288,232 @@ export const projects: Project[] = [
   },
 ]
 
-export const featuredProject = projects.find((p) => p.featured) ?? projects[0]
+const chineseContent: Record<string, ProjectContent> = {
+  'youtube-comment-sentiment': {
+    name: 'YouTube 留言情緒分析',
+    summary: '追蹤觀眾情緒與留言模式的 Streamlit 儀表板。',
+    detail: {
+      problem: '創作者與團隊通常只看到留言數量，卻難以掌握背後的情緒模式。本專案探討觀眾反應如何隨主題、時間與互動訊號改變。',
+      approach: '我建立 Python 資料流程與 Streamlit 介面，蒐集留言、分類情緒、整理關鍵字，並以容易掃讀的方式呈現變化。',
+      result: '儀表板把原始留言轉化為清楚的回饋迴路，協助使用者比較回應品質，找出值得深入閱讀的時刻。',
+    },
+  },
+  'risk-dashboard-concept': {
+    name: '風險訊號儀表板',
+    summary: '將分散的風險指標整理成可快速閱讀的監控介面。',
+    detail: {
+      problem: '風險訊號經常散落在報告、試算表與營運紀錄中，使團隊難以判斷哪些變化最值得注意。',
+      approach: '我以訊號優先度、趨勢方向與簡短說明組織資訊，讓使用者先掃描，再深入調查。',
+      result: '此概念呈現風險儀表板如何在不塞入所有指標的前提下，支持更冷靜且清楚的決策。',
+    },
+  },
+  'insurance-claims-map': {
+    name: '保險理賠模式地圖',
+    summary: '探索理賠類型、時間與客戶情境之間的模式。',
+    detail: {
+      problem: '理賠資料能揭示重要的行為與營運模式，但第一層檢視通常過於密集，不利於快速理解。',
+      approach: '我依理賠類型、時間與情境整理訊號，再以輕量敘事說明發生了什麼變化，以及可能的重要性。',
+      result: '專案草案展示如何從原始紀錄走向更容易討論的商業問題。',
+    },
+  },
+  'personal-data-lab': {
+    name: '個人資料實驗室',
+    summary: '用來反思習慣、日常與重複訊號的小型分析空間。',
+    detail: {
+      problem: '個人追蹤工具會蒐集大量資訊，卻很少協助人們溫和地理解自己的模式。',
+      approach: '我探索如何用簡單圖表、標籤與每週摘要，把紀錄轉化為觀察，而不是壓力。',
+      result: '此概念把資料定位為反思工具，讓使用者更有自主權決定該注意什麼、忽略什麼。',
+    },
+  },
+  'study-resource-system': {
+    name: '學習資源系統',
+    summary: '以結構化方式整理學習資源、筆記與專案參考。',
+    detail: {
+      problem: '學習材料常散落在分頁、文件與資料夾中，使複習和再次利用變得困難。',
+      approach: '我設計依主題、狀態與專案關聯分類資源的簡單架構。',
+      result: '這套系統讓使用者更容易回到過往研究，並把學習內容連結到未來專案。',
+    },
+  },
+  'restaurant-micro-moment': {
+    name: '餐廳微時刻推薦',
+    summary: '依使用者意圖與當下時機設計的情境感知推薦概念。',
+    detail: {
+      problem: '選餐廳很少只關乎食物；心情、距離、預算、天氣、同行對象與急迫性都會影響什麼才是合適的推薦。',
+      approach: '我整理常見的用餐微時刻，轉化為推薦訊號，並探索介面如何在不顯得機械的情況下解釋建議。',
+      result: '此專案把推薦重新定義為人類情境問題，讓資料訊號連結到更容易理解且及時的決策體驗。',
+    },
+  },
+  'ai-companion-interface': {
+    name: 'AI 夥伴介面',
+    summary: '讓 AI 回應更清楚、平靜且理解情境的互動研究。',
+    detail: {
+      problem: '當介面沒有清楚說明情境、信心程度或下一步時，再強大的 AI 工具也很難被信任。',
+      approach: '我探索提示狀態、回應摘要與行動選項，協助使用者理解 AI 正在做什麼。',
+      result: '原型方向聚焦透明的 AI 工作流程，讓使用者保持方向感，而不只是被動接收輸出。',
+    },
+  },
+  'micro-moment-field-notes': {
+    name: '微時刻田野筆記',
+    summary: '在轉化為產品訊號前，捕捉細微行為時刻的研究格式。',
+    detail: {
+      problem: '當研究過早被濃縮時，猶豫、偏好與情境等細微時刻很容易消失。',
+      approach: '我設計一套筆記結構，記錄觸發點、情緒、限制與可能的設計機會。',
+      result: '此格式保留質性觀察的價值，方便後續產品思考與 AI 輔助模式辨識。',
+    },
+  },
+  'recommendation-explainer': {
+    name: '推薦原因解釋器',
+    summary: '在不增加介面負擔的前提下，說明推薦出現原因的 UI 概念。',
+    detail: {
+      problem: '當使用者看不到哪些訊號影響結果時，推薦容易顯得隨機。',
+      approach: '我測試簡短原因標籤、信心提示與可編輯偏好籤等輕量解釋模式。',
+      result: '此概念讓推薦更容易理解，同時維持主要決策流程的簡潔。',
+    },
+  },
+  'context-aware-planner': {
+    name: '情境感知規劃器',
+    summary: '依精力、時間與任務類型調整建議的規劃原型。',
+    detail: {
+      problem: '一般任務規劃器把每件事視為同等重要，卻忽略人們會依精力、急迫性與專注時間安排工作。',
+      approach: '我構想一個衡量任務情境的助手，為深度工作、雜務與恢復時間提供不同規劃模式。',
+      result: '原型讓規劃更貼近人性，由工具配合使用者，而不是迫使所有人套用同一份清單。',
+    },
+  },
+  'ai-3d-workflow': {
+    name: 'AI 輔助 3D 工作流程',
+    summary: '結合 Blender、ComfyUI 與生成式 AI 的創意製作流程。',
+    detail: {
+      problem: '當視覺探索、資產迭代與最終渲染被拆成彼此獨立的步驟時，3D 製作會變得緩慢。',
+      approach: '我以 Blender 建立結構、ComfyUI 進行生成探索，在保留藝術控制的同時維持流程彈性。',
+      result: '此流程降低構想到製作之間的摩擦，讓創作者在投入細部建模前快速測試視覺方向。',
+    },
+  },
+  'generative-poster-lab': {
+    name: '生成式海報實驗室',
+    summary: '結合字體、程序化版面與 AI 生成材質的視覺實驗。',
+    detail: {
+      problem: '創意工具常把版面探索與材質氛圍分開，拖慢早期視覺實驗。',
+      approach: '我探索一套能同時調整網格規則與生成材質的海報流程。',
+      result: '此實驗縮短從情緒到構圖的距離，同時維持字體可讀性與設計意圖。',
+    },
+  },
+  'ambient-portfolio-motion': {
+    name: '作品集環境動態',
+    summary: '以捲動、星光與柔和植物細節創造深度的動態系統。',
+    detail: {
+      problem: '若比例、速度與圖層控制不當，裝飾性動畫很容易搶走作品集內容的注意力。',
+      approach: '我設計低調的捲動連動元素，讓氛圍存在於主要文字與卡片後方。',
+      result: '這套動態語言為頁面建立個性，同時不降低內容可讀性。',
+    },
+  },
+  'digital-garden-study': {
+    name: '數位花園研究',
+    summary: '連結筆記、專案與個人成長歷程的視覺系統。',
+    detail: {
+      problem: '個人網站容易變成靜態履歷，忽略興趣與實驗之間持續演化的連結。',
+      approach: '我探索花園式隱喻，讓專案、筆記與里程碑彼此連結又不顯雜亂。',
+      result: '此研究指向一種能隨新想法與作品自然成長的個人作品集。',
+    },
+  },
+  'interactive-mood-scene': {
+    name: '互動氛圍場景',
+    summary: '會回應捲動與游標移動的小型氛圍場景。',
+    detail: {
+      problem: '個人頁面需要令人記住，但不應以清晰度或效能為代價。',
+      approach: '我使用 CSS 與動態函式庫測試輕量互動模式，避免依賴沉重視覺資產。',
+      result: '此場景增加網站的存在感，同時維持可及性與快速瀏覽。',
+    },
+  },
+}
+
+export const categoryLabels: Record<Locale, Record<ProjectCategory, string>> = {
+  'zh-TW': {
+    'Data & Systems': '資料與系統',
+    'AI & Interaction': 'AI 與互動',
+    'Creative Experiments': '創意實驗',
+  },
+  en: {
+    'Data & Systems': 'Data & Systems',
+    'AI & Interaction': 'AI & Interaction',
+    'Creative Experiments': 'Creative Experiments',
+  },
+}
+
+const chineseTagLabels: Record<string, string> = {
+  Streamlit: 'Streamlit',
+  Python: 'Python',
+  NLP: 'NLP',
+  'Data Visualization': '資料視覺化',
+  Dashboard: '儀表板',
+  'Risk Analysis': '風險分析',
+  'Systems Thinking': '系統思考',
+  'Data Modeling': '資料建模',
+  Insurance: '保險',
+  'Pattern Discovery': '模式探索',
+  'Personal Analytics': '個人分析',
+  Visualization: '視覺化',
+  Reflection: '反思',
+  'Information Architecture': '資訊架構',
+  'Knowledge Base': '知識庫',
+  Workflow: '工作流程',
+  'Context-aware Systems': '情境感知系統',
+  Personalization: '個人化',
+  'UX Research': '使用者研究',
+  'Behavior Modeling': '行為建模',
+  'AI UX': 'AI 使用者體驗',
+  'Conversation Design': '對話設計',
+  Prototype: '原型',
+  Behavior: '行為',
+  'Field Notes': '田野筆記',
+  'Explainable AI': '可解釋 AI',
+  'UI Design': '介面設計',
+  Planning: '規劃',
+  'Context-aware UX': '情境感知體驗',
+  'AI Assistant': 'AI 助理',
+  Blender: 'Blender',
+  ComfyUI: 'ComfyUI',
+  'Generative AI': '生成式 AI',
+  'Workflow Design': '工作流程設計',
+  'Generative Design': '生成式設計',
+  Typography: '字體設計',
+  'Creative Coding': '創意程式設計',
+  'Motion Design': '動態設計',
+  'Framer Motion': 'Framer Motion',
+  Interaction: '互動',
+  'Digital Garden': '數位花園',
+  'Visual System': '視覺系統',
+  Storytelling: '敘事設計',
+  'Interactive Scene': '互動場景',
+  'CSS Motion': 'CSS 動態',
+  Atmosphere: '氛圍',
+}
+
+export const projects: Project[] = projectSeeds.map((seed) => {
+  const { name, summary, detail, ...metadata } = seed
+  return {
+    ...metadata,
+    content: {
+      'zh-TW': chineseContent[seed.id],
+      en: { name, summary, detail },
+    },
+  }
+})
+
+export function localizeProject(project: Project, locale: Locale): LocalizedProject {
+  const { content, ...metadata } = project
+  return {
+    ...metadata,
+    tags:
+      locale === 'zh-TW'
+        ? project.tags.map((tag) => chineseTagLabels[tag] ?? tag)
+        : project.tags,
+    ...content[locale],
+    categoryLabel: categoryLabels[locale][project.category],
+  }
+}
+
+export function getLocalizedProjects(locale: Locale) {
+  return projects.map((project) => localizeProject(project, locale))
+}
+
+export const featuredProject = projects.find((project) => project.featured) ?? projects[0]

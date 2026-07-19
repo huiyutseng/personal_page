@@ -1,76 +1,190 @@
-// Central place for all copy, contact info, and asset paths.
-// Update values here to personalize the site without editing components.
-
-export const site = {
+export const siteShared = {
   brand: 'Huiyu Tseng',
-  brandZh: '曾慧瑜',
-
-  nav: [
-    { id: 'home', label: 'Home' },
-    { id: 'about', label: 'About' },
-    { id: 'projects', label: 'Projects' },
-    { id: 'journey', label: 'Journey' },
-    { id: 'contact', label: 'Contact' },
-  ],
-
-  hero: {
-    greeting: "Hi, I'm",
-    name: 'Huiyu',
-    tagline: ['I connect human behavior, data, and technology', 'to design clearer digital experiences.'],
-    taglineZh: [
-      '我關注人們在日常選擇裡留下的小訊號，',
-      '用資料分析與互動設計，把模糊的感受整理成可行的洞察。',
-    ],
-    ctaPrimary: 'Explore My Projects',
-    ctaSecondary: 'Get to Know Me',
-    sideNote: ['Every', 'micro-moment', 'leaves a signal.'],
-    scrollHint: 'Scroll to explore',
-    portraitImage: '/images/profile.jpg',
-  },
-
-  about: {
-    title: 'About Me',
-    subtitle: 'I see the invisible, and make it meaningful.',
-    columns: [
-      {
-        icon: 'Eye' as const,
-        title: 'What I Notice',
-        body: 'I notice the quiet context behind decisions: timing, emotion, constraints, and the small behaviors people rarely explain out loud.',
-      },
-      {
-        icon: 'Brain' as const,
-        title: 'How I Think',
-        body: 'I move between systems thinking and storytelling. I like turning messy observations into patterns, hypotheses, and product directions.',
-      },
-      {
-        icon: 'Sprout' as const,
-        title: 'What I Build',
-        body: 'I build data products, AI-assisted workflows, and interactive prototypes that make information easier to feel, compare, and act on.',
-      },
-    ],
-  },
-
-  projects: {
-    title: 'Projects',
-    subtitle: 'Selected works across data, AI, and creative systems.',
-    viewAll: 'View Project Details',
-  },
-
-  journey: {
-    title: 'My Journey',
-    subtitle: 'A path of finance, systems, data, and curiosity.',
-  },
-
   contact: {
-    title: "Let's Connect",
-    subtitle: 'Open to collaboration, internships, and thoughtful product conversations.',
     email: 'huiyu.work@gmail.com',
     github: 'github.com/huiyutseng',
     githubUrl: 'https://github.com/huiyutseng',
     linkedin: 'linkedin.com/in/huiyu',
     linkedinUrl: 'https://www.linkedin.com/in/huiyu',
-    resumeLabel: 'Download Resume',
     resumePath: '/resume/resume.pdf',
     devicePreviewImage: '/images/device-preview.png',
+  },
+  hero: {
+    portraitImage: '/images/profile.jpg',
+  },
+} as const
+
+export const site = {
+  'zh-TW': {
+    nav: [
+      { id: 'home', label: '首頁' },
+      { id: 'about', label: '關於我' },
+      { id: 'projects', label: '專案' },
+      { id: 'journey', label: '歷程' },
+      { id: 'contact', label: '聯絡' },
+    ],
+    hero: {
+      greeting: '嗨，我是',
+      name: '慧瑜',
+      tagline: ['我連結人類行為、資料與科技，', '設計更清晰的數位體驗。'],
+      description: [
+        '我關注人們在日常選擇裡留下的小訊號，',
+        '用資料分析與互動設計，把模糊的感受整理成可行的洞察。',
+      ],
+      ctaPrimary: '探索我的專案',
+      ctaSecondary: '進一步認識我',
+      sideNote: ['每一個', '微小時刻', '都留下訊號。'],
+      scrollHint: '向下探索',
+      portraitAlt: '曾慧瑜的個人肖像',
+    },
+    about: {
+      title: '關於我',
+      subtitle: '看見不易察覺的線索，讓它們變得有意義。',
+      columns: [
+        {
+          icon: 'Eye' as const,
+          title: '我注意什麼',
+          body: '我留意決策背後安靜卻重要的脈絡：時間、情緒、限制，以及人們很少明說的細微行為。',
+        },
+        {
+          icon: 'Brain' as const,
+          title: '我如何思考',
+          body: '我在系統思考與敘事之間來回，喜歡把混亂的觀察整理成模式、假設與產品方向。',
+        },
+        {
+          icon: 'Sprout' as const,
+          title: '我創造什麼',
+          body: '我打造資料產品、AI 輔助流程與互動原型，讓資訊更容易被感受、比較並轉化為行動。',
+        },
+      ],
+    },
+    projects: {
+      title: '專案作品',
+      subtitle: '精選資料、AI 與創意系統相關作品。',
+      viewDetails: '查看專案詳情',
+      tabsLabel: '專案分類',
+      empty: '目前這個分類還沒有專案。',
+    },
+    journey: {
+      title: '我的歷程',
+      subtitle: '一段連結金融、系統、資料與好奇心的路徑。',
+    },
+    featured: {
+      eyebrow: '精選專案',
+      viewDetails: '閱讀完整案例',
+    },
+    contact: {
+      title: '與我聯絡',
+      subtitle: '歡迎交流合作、實習機會，以及值得深入思考的產品議題。',
+      resumeLabel: '下載履歷',
+      deviceNames: ['桌機', '平板', '手機'],
+      previewAlt: '版面預覽',
+    },
+    footer: '以好奇心、資料與細節打造。',
+    common: {
+      connect: '與我聯絡',
+      openMenu: '開啟選單',
+      closeMenu: '關閉選單',
+      language: '語言',
+    },
+    projectDetail: {
+      back: '回到所有專案',
+      notFound: '找不到這個專案',
+      problem: '問題背景',
+      approach: '我的方法',
+      result: '專案成果',
+      imageAlt: '專案畫面',
+      liveDemo: '線上展示',
+        previous: '上一個專案',
+        next: '下一個專案',
+        navigationLabel: '專案導覽',
+        related: '相關專案',
+    },
+  },
+  en: {
+    nav: [
+      { id: 'home', label: 'Home' },
+      { id: 'about', label: 'About' },
+      { id: 'projects', label: 'Projects' },
+      { id: 'journey', label: 'Journey' },
+      { id: 'contact', label: 'Contact' },
+    ],
+    hero: {
+      greeting: "Hi, I'm",
+      name: 'Huiyu',
+      tagline: ['I connect human behavior, data, and technology', 'to design clearer digital experiences.'],
+      description: [
+        'I notice the small signals people leave in everyday choices,',
+        'then turn fuzzy feelings into actionable insights through data and interaction design.',
+      ],
+      ctaPrimary: 'Explore My Projects',
+      ctaSecondary: 'Get to Know Me',
+      sideNote: ['Every', 'micro-moment', 'leaves a signal.'],
+      scrollHint: 'Scroll to explore',
+      portraitAlt: 'Portrait of Huiyu Tseng',
+    },
+    about: {
+      title: 'About Me',
+      subtitle: 'I see the invisible, and make it meaningful.',
+      columns: [
+        {
+          icon: 'Eye' as const,
+          title: 'What I Notice',
+          body: 'I notice the quiet context behind decisions: timing, emotion, constraints, and the small behaviors people rarely explain out loud.',
+        },
+        {
+          icon: 'Brain' as const,
+          title: 'How I Think',
+          body: 'I move between systems thinking and storytelling. I like turning messy observations into patterns, hypotheses, and product directions.',
+        },
+        {
+          icon: 'Sprout' as const,
+          title: 'What I Build',
+          body: 'I build data products, AI-assisted workflows, and interactive prototypes that make information easier to feel, compare, and act on.',
+        },
+      ],
+    },
+    projects: {
+      title: 'Projects',
+      subtitle: 'Selected works across data, AI, and creative systems.',
+      viewDetails: 'View Project Details',
+      tabsLabel: 'Project categories',
+      empty: 'There are no projects in this category yet.',
+    },
+    journey: {
+      title: 'My Journey',
+      subtitle: 'A path of finance, systems, data, and curiosity.',
+    },
+    featured: {
+      eyebrow: 'Featured Project',
+      viewDetails: 'Read Full Case Study',
+    },
+    contact: {
+      title: "Let's Connect",
+      subtitle: 'Open to collaboration, internships, and thoughtful product conversations.',
+      resumeLabel: 'Download Resume',
+      deviceNames: ['Desktop', 'Tablet', 'Mobile'],
+      previewAlt: 'layout preview',
+    },
+    footer: 'Built with curiosity, data, and care.',
+    common: {
+      connect: "Let's Connect",
+      openMenu: 'Open menu',
+      closeMenu: 'Close menu',
+      language: 'Language',
+    },
+    projectDetail: {
+      back: 'Back to All Projects',
+      notFound: 'Project Not Found',
+      problem: 'The Problem',
+      approach: 'My Approach',
+      result: 'The Result',
+      imageAlt: 'project preview',
+      liveDemo: 'Live Demo',
+        previous: 'Previous Project',
+        next: 'Next Project',
+        navigationLabel: 'Project navigation',
+        related: 'Related Projects',
+    },
   },
 } as const

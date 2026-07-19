@@ -1,16 +1,20 @@
 import { motion } from 'framer-motion'
 import { ArrowUpRight, Sparkles } from 'lucide-react'
 import { Link } from 'react-router-dom'
-import type { Project } from '../data/types'
+import { site } from '../data/site'
+import type { LocalizedProject } from '../data/types'
+import { useLanguage } from '../i18n/LanguageContext'
 import ImageWithFallback from './ImageWithFallback'
 
-export default function ProjectCard({ project }: { project: Project }) {
+export default function ProjectCard({ project }: { project: LocalizedProject }) {
+  const { locale } = useLanguage()
+  const copy = site[locale]
   return (
     <motion.div layout className="group relative h-full">
       <Link
         to={`/projects/${project.id}`}
         data-cursor-hover
-        aria-label={`查看 ${project.name} 專案詳情`}
+        aria-label={`${copy.projects.viewDetails}: ${project.name}`}
         className="focus-ring relative flex h-full flex-col overflow-hidden rounded-2xl border border-lavender/15 bg-navy-card transition-all duration-300 hover:-translate-y-1.5 hover:border-gold/50 hover:shadow-[0_20px_45px_-20px_rgba(216,180,106,0.35)]"
       >
         <span className="pointer-events-none absolute right-3 top-3 z-10 text-gold opacity-0 transition-opacity duration-300 group-hover:animate-[twinkle_1.6s_ease-in-out_infinite] group-hover:opacity-90">
@@ -29,7 +33,7 @@ export default function ProjectCard({ project }: { project: Project }) {
         </div>
 
         <div className="flex flex-1 flex-col p-6">
-          <span className="font-sans-tc text-xs uppercase tracking-wider text-lavender">{project.category}</span>
+          <span className="font-sans-tc text-xs uppercase tracking-wider text-lavender">{project.categoryLabel}</span>
           <h3 className="mt-2 font-serif-en text-xl text-ink-dark">{project.name}</h3>
           <p className="mt-2 font-sans-tc text-sm leading-relaxed text-ink-dark-soft">{project.summary}</p>
 

@@ -1,7 +1,8 @@
 import { motion, useReducedMotion } from 'framer-motion'
 import { BrainCircuit, GraduationCap, Landmark, Globe2, ShieldCheck, Sparkles, type LucideIcon } from 'lucide-react'
-import { journey } from '../data/journey'
+import { journey, localizeJourney } from '../data/journey'
 import { site } from '../data/site'
+import { useLanguage } from '../i18n/LanguageContext'
 import { fadeUpInView } from '../lib/motion'
 import FloatingParticles from './FloatingParticles'
 import FloralDecoration from './FloralDecoration'
@@ -18,8 +19,11 @@ const ICONS: Record<string, LucideIcon> = {
 }
 
 export default function JourneySection() {
+  const { locale } = useLanguage()
+  const copy = site[locale]
+  const milestones = journey.map((item) => localizeJourney(item, locale))
   const reduceMotion = Boolean(useReducedMotion())
-  const n = journey.length
+  const n = milestones.length
 
   return (
     <section id="journey" className="relative overflow-hidden bg-navy-deep px-5 py-24 sm:px-8 lg:py-32">
@@ -34,9 +38,9 @@ export default function JourneySection() {
 
       <div className="relative z-10 mx-auto max-w-6xl">
         <motion.div {...fadeUpInView(0, reduceMotion)} className="text-center">
-          <h2 className="font-serif-en text-4xl font-medium text-ink-dark sm:text-5xl">{site.journey.title}</h2>
+          <h2 className="font-serif-en text-4xl font-medium text-ink-dark sm:text-5xl">{copy.journey.title}</h2>
           <div className="mx-auto mt-3 h-px w-16 bg-gold" />
-          <p className="mt-4 font-serif-en text-lg italic text-ink-dark-soft">{site.journey.subtitle}</p>
+          <p className="mt-4 font-serif-en text-lg italic text-ink-dark-soft">{copy.journey.subtitle}</p>
         </motion.div>
 
         {/* Desktop: horizontal vine */}
@@ -56,7 +60,7 @@ export default function JourneySection() {
           </svg>
 
           <ol className="relative grid grid-cols-5 gap-4">
-            {journey.map((item, i) => {
+            {milestones.map((item, i) => {
               const Icon = ICONS[item.icon]
               return (
                 <motion.li
@@ -70,7 +74,11 @@ export default function JourneySection() {
                   </span>
                   <h3 className="mt-4 font-serif-en text-base text-ink-dark">{item.title}</h3>
                   <p className="mt-2 font-sans-tc text-xs leading-relaxed text-ink-dark-soft">{item.description}</p>
-                  <span className="sr-only">{`第 ${i + 1} 之 ${n} 個里程碑`}</span>
+                  <span className="sr-only">
+                    {locale === 'zh-TW'
+                      ? `第 ${i + 1} 個里程碑，共 ${n} 個`
+                      : `Milestone ${i + 1} of ${n}`}
+                  </span>
                 </motion.li>
               )
             })}
@@ -79,7 +87,7 @@ export default function JourneySection() {
 
         {/* Mobile: vertical timeline */}
         <ol className="relative mt-16 space-y-10 border-l border-gold/30 pl-8 md:hidden">
-          {journey.map((item, i) => {
+          {milestones.map((item, i) => {
             const Icon = ICONS[item.icon]
             return (
               <motion.li key={item.id} {...fadeUpInView(0.08 * i, reduceMotion)} className="group relative">

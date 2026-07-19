@@ -1,6 +1,7 @@
 import { motion, useReducedMotion } from 'framer-motion'
 import { Brain, Eye, Sprout, type LucideIcon } from 'lucide-react'
 import { site } from '../data/site'
+import { useLanguage } from '../i18n/LanguageContext'
 import { fadeUpInView } from '../lib/motion'
 import FloralDecoration from './FloralDecoration'
 import FloatingParticles from './FloatingParticles'
@@ -10,6 +11,8 @@ import ScrollFlower from './ScrollFlower'
 const ICONS: Record<string, LucideIcon> = { Eye, Brain, Sprout }
 
 export default function AboutSection() {
+  const { locale } = useLanguage()
+  const copy = site[locale]
   const reduceMotion = Boolean(useReducedMotion())
 
   return (
@@ -30,13 +33,13 @@ export default function AboutSection() {
           </ScrollFlower>
 
           <div className="relative text-center">
-            <h2 className="font-serif-en text-4xl font-medium text-ink-light sm:text-5xl">{site.about.title}</h2>
+            <h2 className="font-serif-en text-4xl font-medium text-ink-light sm:text-5xl">{copy.about.title}</h2>
             <div className="mx-auto mt-3 h-px w-16 bg-gold" />
-            <p className="mt-4 font-serif-en text-lg italic text-ink-light-soft">{site.about.subtitle}</p>
+            <p className="mt-4 font-serif-en text-lg italic text-ink-light-soft">{copy.about.subtitle}</p>
           </div>
 
           <div className="relative mt-14 grid grid-cols-1 gap-10 sm:grid-cols-3 sm:gap-8">
-            {site.about.columns.map((col, i) => {
+            {copy.about.columns.map((col, i) => {
               const Icon = ICONS[col.icon]
               return (
                 <motion.div

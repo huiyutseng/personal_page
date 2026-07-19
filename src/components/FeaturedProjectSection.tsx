@@ -1,8 +1,9 @@
 import { motion, useReducedMotion } from 'framer-motion'
 import { ArrowRight, CircleHelp, CircleCheck, Lightbulb } from 'lucide-react'
 import { Link } from 'react-router-dom'
-import { featuredProject } from '../data/projects'
+import { featuredProject, localizeProject } from '../data/projects'
 import { site } from '../data/site'
+import { useLanguage } from '../i18n/LanguageContext'
 import { fadeUpInView } from '../lib/motion'
 import FloatingParticles from './FloatingParticles'
 import FloralDecoration from './FloralDecoration'
@@ -11,13 +12,15 @@ import ParallaxLayer from './ParallaxLayer'
 import ScrollFlower from './ScrollFlower'
 import ScrollPlanet from './ScrollPlanet'
 
-const BLOCKS = [
-  { key: 'problem', label: 'The Problem', icon: CircleHelp } as const,
-  { key: 'approach', label: 'My Approach', icon: Lightbulb } as const,
-  { key: 'result', label: 'The Result', icon: CircleCheck } as const,
-]
-
 export default function FeaturedProjectSection() {
+  const { locale } = useLanguage()
+  const copy = site[locale]
+  const project = localizeProject(featuredProject, locale)
+  const blocks = [
+    { key: 'problem', label: copy.projectDetail.problem, icon: CircleHelp },
+    { key: 'approach', label: copy.projectDetail.approach, icon: Lightbulb },
+    { key: 'result', label: copy.projectDetail.result, icon: CircleCheck },
+  ] as const
   const reduceMotion = Boolean(useReducedMotion())
 
   return (
@@ -36,19 +39,20 @@ export default function FeaturedProjectSection() {
         >
           <div className="overflow-hidden rounded-2xl">
             <ImageWithFallback
-              src={featuredProject.image}
-              alt={`${featuredProject.name} 專案畫面`}
+              src={project.image}
+              alt={`${project.name} ${copy.projectDetail.imageAlt}`}
               className="h-full w-full object-cover transition-transform duration-500 hover:scale-[1.04]"
               fallbackClassName="aspect-[4/3] w-full"
             />
           </div>
 
           <div className="flex flex-col justify-center">
-            <h2 className="font-serif-en text-3xl font-medium text-ink-light sm:text-4xl">{featuredProject.name}</h2>
-            <p className="mt-2 font-sans-tc text-sm text-ink-light-soft">{featuredProject.summary}</p>
+            <span className="mb-3 font-sans-tc text-xs uppercase tracking-wider text-gold-warm">{copy.featured.eyebrow}</span>
+            <h2 className="font-serif-en text-3xl font-medium text-ink-light sm:text-4xl">{project.name}</h2>
+            <p className="mt-2 font-sans-tc text-sm text-ink-light-soft">{project.summary}</p>
 
             <div className="mt-8 space-y-6">
-              {BLOCKS.map((block) => {
+              {blocks.map((block) => {
                 const Icon = block.icon
                 return (
                   <div key={block.key} className="flex gap-3">
@@ -58,7 +62,7 @@ export default function FeaturedProjectSection() {
                     <div>
                       <h3 className="font-serif-en text-base text-ink-light">{block.label}</h3>
                       <p className="mt-1 font-sans-tc text-sm leading-relaxed text-ink-light-soft">
-                        {featuredProject.detail[block.key]}
+                        {project.detail[block.key]}
                       </p>
                     </div>
                   </div>
@@ -67,11 +71,11 @@ export default function FeaturedProjectSection() {
             </div>
 
             <Link
-              to={`/projects/${featuredProject.id}`}
+              to={`/projects/${project.id}`}
               data-cursor-hover
               className="focus-ring group mt-10 inline-flex w-fit items-center gap-2 rounded-full bg-lavender px-6 py-3 font-sans-tc text-sm font-medium text-navy-black transition-all duration-300 hover:bg-lavender-pink active:scale-95"
             >
-              {site.projects.viewAll}
+              {copy.featured.viewDetails}
               <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
             </Link>
           </div>

@@ -1,7 +1,8 @@
 import { motion, useReducedMotion } from 'framer-motion'
 import { ChevronDown, Sparkles } from 'lucide-react'
 import { useRef } from 'react'
-import { site } from '../data/site'
+import { site, siteShared } from '../data/site'
+import { useLanguage } from '../i18n/LanguageContext'
 import { fadeUp as fadeUpBase } from '../lib/motion'
 import CounterRotatingRings from './CounterRotatingRings'
 import FloatingParticles from './FloatingParticles'
@@ -13,6 +14,8 @@ import ScrollFlower from './ScrollFlower'
 
 export default function HeroSection() {
   const sectionRef = useRef<HTMLElement>(null)
+  const { locale } = useLanguage()
+  const copy = site[locale]
   const reduceMotion = useReducedMotion()
   const fadeUp = (delay: number) => fadeUpBase(delay, Boolean(reduceMotion))
 
@@ -48,20 +51,20 @@ export default function HeroSection() {
         {/* left column */}
         <div className="text-center lg:text-left">
           <motion.p {...fadeUp(0)} className="font-serif-en text-lg italic text-lavender">
-            {site.hero.greeting}
+            {copy.hero.greeting}
           </motion.p>
           <motion.h1
             {...fadeUp(0.08)}
             className="mt-2 font-serif-en text-5xl font-medium leading-[1.05] text-ink-dark sm:text-6xl lg:text-7xl"
           >
             <span className="bg-gradient-to-r from-gold-warm via-gold to-lavender-pink bg-clip-text text-transparent">
-              {site.hero.name}
+              {copy.hero.name}
             </span>
             .
           </motion.h1>
 
           <motion.p {...fadeUp(0.16)} className="mt-6 font-serif-en text-xl italic text-ink-dark-soft sm:text-2xl">
-            {site.hero.tagline.map((line) => (
+            {copy.hero.tagline.map((line) => (
               <span key={line} className="block">
                 {line}
               </span>
@@ -69,7 +72,7 @@ export default function HeroSection() {
           </motion.p>
 
           <motion.div {...fadeUp(0.24)} className="mt-6 font-sans-tc text-base leading-relaxed text-ink-dark-soft">
-            {site.hero.taglineZh.map((line) => (
+            {copy.hero.description.map((line) => (
               <p key={line}>{line}</p>
             ))}
           </motion.div>
@@ -87,7 +90,7 @@ export default function HeroSection() {
               }}
               className="focus-ring group inline-flex items-center gap-2 rounded-full bg-lavender px-7 py-3 font-sans-tc text-sm font-medium text-navy-black shadow-[0_8px_30px_-8px_rgba(184,167,217,0.6)] transition-all duration-300 hover:bg-lavender-pink hover:shadow-[0_10px_36px_-6px_rgba(216,196,232,0.7)] active:scale-95"
             >
-              {site.hero.ctaPrimary}
+              {copy.hero.ctaPrimary}
               <Sparkles className="h-4 w-4 transition-transform duration-300 group-hover:rotate-45" strokeWidth={1.75} />
             </MagneticButton>
             <MagneticButton
@@ -99,7 +102,7 @@ export default function HeroSection() {
               }}
               className="focus-ring inline-flex items-center gap-2 rounded-full border border-gold/50 px-7 py-3 font-sans-tc text-sm font-medium text-ink-dark transition-all duration-300 hover:border-gold hover:bg-gold/10 active:scale-95"
             >
-              {site.hero.ctaSecondary}
+              {copy.hero.ctaSecondary}
             </MagneticButton>
           </motion.div>
         </div>
@@ -110,8 +113,8 @@ export default function HeroSection() {
             <CounterRotatingRings scrollTarget={sectionRef} />
             <div className="absolute inset-0 overflow-hidden rounded-full shadow-[0_0_60px_-10px_rgba(184,167,217,0.45)]">
               <ImageWithFallback
-                src={site.hero.portraitImage}
-                alt="Huiyu 的個人肖像"
+                src={siteShared.hero.portraitImage}
+                alt={copy.hero.portraitAlt}
                 className="h-full w-full object-cover"
                 fallbackClassName="h-full w-full"
                 icon={<Sparkles className="h-10 w-10 text-lavender/70" strokeWidth={1} />}
@@ -138,7 +141,7 @@ export default function HeroSection() {
           </div>
 
           <div className="absolute -right-2 top-1/2 hidden -translate-y-1/2 translate-x-full text-right font-serif-en text-sm italic leading-relaxed text-ink-dark-soft xl:block">
-            {site.hero.sideNote.map((line) => (
+            {copy.hero.sideNote.map((line) => (
               <p key={line}>{line}</p>
             ))}
           </div>
@@ -155,7 +158,7 @@ export default function HeroSection() {
         {...fadeUp(0.5)}
         className="focus-ring absolute inset-x-0 bottom-8 mx-auto flex w-fit flex-col items-center gap-2 text-ink-dark-soft"
       >
-        <span className="font-sans-tc text-xs tracking-widest">{site.hero.scrollHint}</span>
+        <span className="font-sans-tc text-xs tracking-widest">{copy.hero.scrollHint}</span>
         <motion.span
           animate={reduceMotion ? {} : { y: [0, 8, 0] }}
           transition={reduceMotion ? {} : { duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}

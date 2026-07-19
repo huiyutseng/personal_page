@@ -1,8 +1,9 @@
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
-import { PROJECT_CATEGORIES, projects } from '../data/projects'
+import { PROJECT_CATEGORIES, categoryLabels, getLocalizedProjects } from '../data/projects'
 import { site } from '../data/site'
 import type { ProjectCategory } from '../data/types'
+import { useLanguage } from '../i18n/LanguageContext'
 import { fadeUpInView } from '../lib/motion'
 import ProjectCard from './ProjectCard'
 import FloatingParticles from './FloatingParticles'
@@ -13,6 +14,9 @@ import ScrollFlower from './ScrollFlower'
 const clamp = (value: number, min: number, max: number) => Math.min(Math.max(value, min), max)
 
 export default function ProjectsSection() {
+  const { locale } = useLanguage()
+  const copy = site[locale]
+  const projects = getLocalizedProjects(locale)
   const reduceMotion = Boolean(useReducedMotion())
   const [active, setActive] = useState<ProjectCategory>(PROJECT_CATEGORIES[0])
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
@@ -67,16 +71,16 @@ export default function ProjectsSection() {
       </ScrollFlower>
       <div className="relative z-10 mx-auto max-w-6xl">
         <motion.div {...fadeUpInView(0, reduceMotion)} className="text-center">
-          <h2 className="font-serif-en text-4xl font-medium text-ink-dark sm:text-5xl">{site.projects.title}</h2>
+          <h2 className="font-serif-en text-4xl font-medium text-ink-dark sm:text-5xl">{copy.projects.title}</h2>
           <div className="mx-auto mt-3 h-px w-16 bg-gold" />
-          <p className="mt-4 font-serif-en text-lg italic text-ink-dark-soft">{site.projects.subtitle}</p>
+          <p className="mt-4 font-serif-en text-lg italic text-ink-dark-soft">{copy.projects.subtitle}</p>
         </motion.div>
 
         <motion.div
           {...fadeUpInView(0.1, reduceMotion)}
           className="mt-10 flex flex-wrap justify-center gap-3"
           role="tablist"
-          aria-label="專案分類"
+          aria-label={copy.projects.tabsLabel}
         >
           {PROJECT_CATEGORIES.map((category) => (
             <button
@@ -92,7 +96,7 @@ export default function ProjectsSection() {
                   : 'border-lavender/25 text-ink-dark-soft hover:border-lavender/60 hover:text-ink-dark'
               }`}
             >
-              {category}
+              {categoryLabels[locale][category]}
             </button>
           ))}
         </motion.div>
@@ -133,7 +137,7 @@ export default function ProjectsSection() {
         </div>
 
         {filtered.length === 0 && (
-          <p className="mt-12 text-center font-sans-tc text-sm text-ink-dark-soft">此分類即將加入新作品。</p>
+          <p className="mt-12 text-center font-sans-tc text-sm text-ink-dark-soft">{copy.projects.empty}</p>
         )}
       </div>
     </section>

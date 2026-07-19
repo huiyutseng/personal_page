@@ -1,3 +1,5 @@
+import type { Locale, LocalizedText } from '../i18n/types'
+
 export type ProjectCategory = 'Data & Systems' | 'AI & Interaction' | 'Creative Experiments'
 
 export interface ProjectDetail {
@@ -6,25 +8,36 @@ export interface ProjectDetail {
   result: string
 }
 
+export interface ProjectContent {
+  name: string
+  summary: string
+  detail: ProjectDetail
+}
+
 export interface Project {
   id: string
   category: ProjectCategory
-  name: string
-  /** one-line tech/summary line shown under the title, e.g. "Emotion Tracking · Streamlit · Data Visualization" */
-  summary: string
+  content: Record<Locale, ProjectContent>
   tags: string[]
-  /** path under /public, e.g. "/images/life-insight-ai.png" — see src/data/README placeholder note */
   image: string
   github?: string
   demo?: string
-  detail: ProjectDetail
   featured?: boolean
+}
+
+export interface LocalizedProject extends Omit<Project, 'content' | 'category'>, ProjectContent {
+  category: ProjectCategory
+  categoryLabel: string
 }
 
 export interface JourneyMilestone {
   id: string
-  /** lucide-react icon component name, resolved in JourneySection */
   icon: 'ShieldCheck' | 'Landmark' | 'Globe2' | 'GraduationCap' | 'BrainCircuit'
+  title: LocalizedText
+  description: LocalizedText
+}
+
+export interface LocalizedJourneyMilestone extends Omit<JourneyMilestone, 'title' | 'description'> {
   title: string
   description: string
 }
