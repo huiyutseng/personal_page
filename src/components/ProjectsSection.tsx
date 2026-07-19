@@ -6,63 +6,66 @@ import type { ProjectCategory } from '../data/types'
 import { fadeUpInView } from '../lib/motion'
 import ProjectCard from './ProjectCard'
 import FloatingParticles from './FloatingParticles'
+import FloralDecoration from './FloralDecoration'
 import ParallaxLayer from './ParallaxLayer'
+import ScrollFlower from './ScrollFlower'
 
-// how close to the edge (px) the cursor must be to trigger auto-scroll
-const EDGE_ZONE = 90
-// px scrolled per animation frame while hovering an edge
-const SCROLL_SPEED = 6
+const clamp = (value: number, min: number, max: number) => Math.min(Math.max(value, min), max)
 
 export default function ProjectsSection() {
   const reduceMotion = Boolean(useReducedMotion())
   const [active, setActive] = useState<ProjectCategory>(PROJECT_CATEGORIES[0])
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
+  const [trackMetrics, setTrackMetrics] = useState({ cardStep: 0, visibleCount: 3 })
+  const viewportRef = useRef<HTMLDivElement>(null)
+  const trackRef = useRef<HTMLDivElement>(null)
   const filtered = projects.filter((p) => p.category === active)
-
-  const scrollerRef = useRef<HTMLDivElement>(null)
-  const scrollDirRef = useRef(0)
+  const maxStartIndex = Math.max(0, filtered.length - trackMetrics.visibleCount)
+  const centeredStartIndex = clamp(
+    Math.floor((filtered.length - trackMetrics.visibleCount) / 2),
+    0,
+    maxStartIndex,
+  )
+  const hoveredStartIndex =
+    hoveredIndex === null
+      ? centeredStartIndex
+      : clamp(hoveredIndex - Math.floor(trackMetrics.visibleCount / 2), 0, maxStartIndex)
+  const translateX = -(hoveredStartIndex * trackMetrics.cardStep)
 
   useEffect(() => {
-    scrollerRef.current?.scrollTo({ left: 0 })
+    setHoveredIndex(null)
   }, [active])
 
   useEffect(() => {
-    if (reduceMotion) return
-    let raf: number
-    const tick = () => {
-      const el = scrollerRef.current
-      if (el && scrollDirRef.current !== 0) {
-        el.scrollLeft += scrollDirRef.current * SCROLL_SPEED
-      }
-      raf = requestAnimationFrame(tick)
-    }
-    raf = requestAnimationFrame(tick)
-    return () => cancelAnimationFrame(raf)
-  }, [reduceMotion])
+    const measureTrack = () => {
+      const viewport = viewportRef.current
+      const track = trackRef.current
+      const firstCard = track?.querySelector<HTMLElement>('[data-project-card]')
+      if (!viewport || !track || !firstCard) return
 
-  const handlePointerMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const el = scrollerRef.current
-    if (!el) return
-    const { left, width } = el.getBoundingClientRect()
-    const x = e.clientX - left
-    if (x < EDGE_ZONE) {
-      scrollDirRef.current = -1
-    } else if (x > width - EDGE_ZONE) {
-      scrollDirRef.current = 1
-    } else {
-      scrollDirRef.current = 0
+      const gap = Number.parseFloat(window.getComputedStyle(track).columnGap || '0')
+      const cardStep = firstCard.offsetWidth + gap
+      const visibleCount = Math.max(1, Math.round((viewport.clientWidth + gap) / cardStep))
+      setTrackMetrics({ cardStep, visibleCount })
     }
-  }
 
-  const handlePointerLeave = () => {
-    scrollDirRef.current = 0
-  }
+    measureTrack()
+    window.addEventListener('resize', measureTrack)
+    return () => window.removeEventListener('resize', measureTrack)
+  }, [active, filtered.length])
 
   return (
-    <section id="projects" className="relative overflow-hidden bg-navy-black px-5 py-24 sm:px-8 lg:py-32">
+    <section id="projects" className="relative z-10 min-h-screen overflow-hidden bg-navy-black px-5 py-24 sm:px-8 lg:py-32">
       <ParallaxLayer offset={40} className="pointer-events-none absolute inset-0">
-        <FloatingParticles count={16} className="absolute inset-0" />
+        <FloatingParticles count={42} className="absolute inset-0" interactive />
       </ParallaxLayer>
-      <div className="relative mx-auto max-w-6xl">
+      <ScrollFlower origin="top" className="pointer-events-none absolute -left-8 top-6 h-32 w-32 opacity-60">
+        <FloralDecoration tone="gold" className="h-full w-full" />
+      </ScrollFlower>
+      <ScrollFlower origin="bottom" className="pointer-events-none absolute -right-8 bottom-10 hidden h-36 w-36 opacity-50 md:block">
+        <FloralDecoration tone="lavender" flip className="h-full w-full" />
+      </ScrollFlower>
+      <div className="relative z-10 mx-auto max-w-6xl">
         <motion.div {...fadeUpInView(0, reduceMotion)} className="text-center">
           <h2 className="font-serif-en text-4xl font-medium text-ink-dark sm:text-5xl">{site.projects.title}</h2>
           <div className="mx-auto mt-3 h-px w-16 bg-gold" />
@@ -94,29 +97,32 @@ export default function ProjectsSection() {
           ))}
         </motion.div>
 
-        <div className="relative mt-12">
-          <div
-            ref={scrollerRef}
-            onMouseMove={handlePointerMove}
-            onMouseLeave={handlePointerLeave}
-            className="no-scrollbar flex gap-7 overflow-x-auto"
+        <div ref={viewportRef} className="relative mt-12 overflow-hidden px-0 sm:-mx-4 sm:px-4">
+          <motion.div
+            ref={trackRef}
+            onMouseLeave={() => setHoveredIndex(null)}
+            animate={{ x: reduceMotion ? 0 : translateX }}
+            transition={{ type: 'spring', stiffness: 130, damping: 24, mass: 0.7 }}
+            className="flex w-max gap-7 pb-2 will-change-transform"
           >
             <AnimatePresence mode="popLayout">
               {filtered.map((project, i) => (
                 <motion.div
                   key={project.id}
                   layout
+                  data-project-card
+                  onMouseEnter={() => setHoveredIndex(i)}
                   initial={reduceMotion ? false : { opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={reduceMotion ? undefined : { opacity: 0, y: -10 }}
                   transition={{ duration: 0.4, delay: reduceMotion ? 0 : i * 0.06 }}
-                  className="w-full flex-none sm:w-[calc(50%-14px)] lg:w-[calc(33.333%-18.66px)]"
+                  className="w-[min(82vw,360px)] flex-none sm:w-[calc((100vw-160px)/2)] lg:w-[calc((min(100vw,72rem)-56px)/3)]"
                 >
                   <ProjectCard project={project} />
                 </motion.div>
               ))}
             </AnimatePresence>
-          </div>
+          </motion.div>
 
           {filtered.length > 0 && (
             <>

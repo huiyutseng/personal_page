@@ -7,6 +7,8 @@ import FloralDecoration from './FloralDecoration'
 import ImageWithFallback from './ImageWithFallback'
 import MagneticButton from './MagneticButton'
 import ParallaxLayer from './ParallaxLayer'
+import ScrollFlower from './ScrollFlower'
+import ScrollPlanet from './ScrollPlanet'
 
 const LINKS = [
   { icon: Mail, label: site.contact.email, href: `mailto:${site.contact.email}` },
@@ -26,18 +28,18 @@ export default function ContactSection() {
   return (
     <section id="contact" className="relative overflow-hidden bg-navy-black px-5 py-24 sm:px-8 lg:py-32">
       <ParallaxLayer offset={40} className="pointer-events-none absolute inset-0">
-        <FloatingParticles count={16} className="absolute inset-0" />
+        <FloatingParticles count={36} className="absolute inset-0" interactive />
       </ParallaxLayer>
-      <div className="relative mx-auto max-w-6xl">
+      <ScrollPlanet tone="lavender" size={46} xRange={[76, 94]} yRange={[4, 88]} />
+      <div className="relative z-10 mx-auto max-w-6xl">
         <motion.div
           {...fadeUpInView(0, reduceMotion)}
           className="grid grid-cols-1 gap-8 rounded-[20px] border border-lavender/25 bg-cream p-6 shadow-[0_30px_70px_-30px_rgba(4,16,31,0.6)] sm:p-10 lg:grid-cols-[0.9fr_1.1fr] lg:p-14"
         >
           <div className="relative">
-            <FloralDecoration
-              tone="lavender"
-              className="pointer-events-none absolute -left-6 -top-6 h-28 w-28 opacity-70"
-            />
+            <ScrollFlower origin="top" className="pointer-events-none absolute -left-6 -top-6 h-28 w-28 opacity-70">
+              <FloralDecoration tone="lavender" className="h-full w-full" />
+            </ScrollFlower>
             <Bird className="absolute bottom-0 left-2 h-8 w-8 text-ink-light-soft/70" strokeWidth={1.25} />
 
             <h2 className="font-serif-en text-4xl font-medium text-ink-light sm:text-5xl">{site.contact.title}</h2>

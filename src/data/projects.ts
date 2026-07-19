@@ -6,240 +6,276 @@ export const PROJECT_CATEGORIES: ProjectCategory[] = [
   'Creative Experiments',
 ]
 
-// Card + detail images live under /public/images/ — drop a real file at the
-// path below and it will replace the gradient placeholder automatically.
 export const projects: Project[] = [
   {
-    id: 'life-insight-ai',
+    id: 'youtube-comment-sentiment',
     category: 'Data & Systems',
-    name: 'youtube comment sentimental analysis',
-    summary: 'Emotion Tracking · Streamlit · Data Visualization',
-    tags: ['Streamlit', 'Python', 'Data Visualization', 'Emotion AI'],
+    name: 'YouTube Comment Sentiment Analysis',
+    summary: 'Streamlit dashboard for tracking audience emotion and comment patterns.',
+    tags: ['Streamlit', 'Python', 'NLP', 'Data Visualization'],
     image: '/images/life-insight-ai.png',
     github: 'https://github.com/huiyutseng/youtube_comment',
     demo: undefined,
     featured: true,
     detail: {
       problem:
-        '人的情緒波動往往被記錄卻沒有被理解，缺乏一個個人化且直觀的工具。',
+        'Creators and teams often see comment volume, but not the emotional pattern behind it. The project asks how audience reaction changes across topics, timing, and engagement signals.',
       approach:
-        '結合情緒分析與視覺化技術，讓使用者能更輕鬆地理解並反思自己的狀態。',
+        'I built a Python pipeline and Streamlit interface to collect comments, classify sentiment, summarize keywords, and visualize changes in a way that is easy to scan.',
       result:
-        '使用者建立了每日的情緒模式，並在日常生活中做出更好的選擇與調整。',
+        'The dashboard turns raw comment threads into clearer feedback loops, helping users compare response quality and identify moments that deserve a closer read.',
     },
   },
   {
-    id: 'data-systems-placeholder-1',
+    id: 'risk-dashboard-concept',
     category: 'Data & Systems',
-    name: 'TODO：專案名稱',
-    summary: 'TODO：一行技術／簡介摘要',
-    tags: ['TODO'],
+    name: 'Risk Signal Dashboard',
+    summary: 'Dashboard concept for turning scattered risk indicators into a readable monitoring view.',
+    tags: ['Dashboard', 'Risk Analysis', 'Systems Thinking'],
     image: '/images/data-systems-placeholder-1.png',
     github: undefined,
     demo: undefined,
     detail: {
-      problem: 'TODO：這個專案想解決什麼問題？',
-      approach: 'TODO：採取了什麼做法或技術？',
-      result: 'TODO：最後達成了什麼成果？',
+      problem:
+        'Risk signals often live across reports, spreadsheets, and operational notes, making it hard to see which changes deserve attention.',
+      approach:
+        'I structured the experience around signal priority, trend direction, and short explanatory notes so users can scan first and investigate second.',
+      result:
+        'The concept clarifies how a risk dashboard can support calmer decisions without overwhelming the user with every available metric.',
     },
   },
   {
-    id: 'data-systems-placeholder-2',
+    id: 'insurance-claims-map',
     category: 'Data & Systems',
-    name: 'TODO：專案名稱',
-    summary: 'TODO：一行技術／簡介摘要',
-    tags: ['TODO'],
+    name: 'Insurance Claims Pattern Map',
+    summary: 'Exploration of claim patterns across categories, timing, and customer context.',
+    tags: ['Data Modeling', 'Insurance', 'Pattern Discovery'],
     image: '/images/data-systems-placeholder-2.png',
     github: undefined,
     demo: undefined,
     detail: {
-      problem: 'TODO：這個專案想解決什麼問題？',
-      approach: 'TODO：採取了什麼做法或技術？',
-      result: 'TODO：最後達成了什麼成果？',
+      problem:
+        'Claims data can reveal useful behavioral and operational patterns, but the first view is often too dense for quick interpretation.',
+      approach:
+        'I grouped signals by claim type, timing, and context, then designed a lightweight narrative around what changed and why it may matter.',
+      result:
+        'The project draft shows how analysis can move from raw records toward business questions that are easier to discuss.',
     },
   },
   {
-    id: 'data-systems-placeholder-3',
+    id: 'personal-data-lab',
     category: 'Data & Systems',
-    name: 'TODO：專案名稱',
-    summary: 'TODO：一行技術／簡介摘要',
-    tags: ['TODO'],
+    name: 'Personal Data Lab',
+    summary: 'A small analytics workspace for reflecting on habits, routines, and recurring signals.',
+    tags: ['Personal Analytics', 'Visualization', 'Reflection'],
     image: '/images/data-systems-placeholder-3.png',
     github: undefined,
     demo: undefined,
     detail: {
-      problem: 'TODO：這個專案想解決什麼問題？',
-      approach: 'TODO：採取了什麼做法或技術？',
-      result: 'TODO：最後達成了什麼成果？',
+      problem:
+        'Personal tracking tools collect information, but they rarely help people form a gentle interpretation of their own patterns.',
+      approach:
+        'I explored how simple charts, labels, and weekly summaries could turn logs into observations instead of pressure.',
+      result:
+        'The concept frames data as a reflection tool, giving the user more agency over what to notice and what to ignore.',
     },
   },
   {
-    id: 'data-systems-placeholder-4',
+    id: 'study-resource-system',
     category: 'Data & Systems',
-    name: 'TODO：專案名稱',
-    summary: 'TODO：一行技術／簡介摘要',
-    tags: ['TODO'],
+    name: 'Study Resource System',
+    summary: 'A structured way to organize learning resources, notes, and project references.',
+    tags: ['Information Architecture', 'Knowledge Base', 'Workflow'],
     image: '/images/data-systems-placeholder-4.png',
     github: undefined,
     demo: undefined,
     detail: {
-      problem: 'TODO：這個專案想解決什麼問題？',
-      approach: 'TODO：採取了什麼做法或技術？',
-      result: 'TODO：最後達成了什麼成果？',
+      problem:
+        'Learning materials often become scattered across tabs, documents, and folders, which makes review and reuse difficult.',
+      approach:
+        'I designed a simple structure for categorizing resources by topic, status, and project relevance.',
+      result:
+        'The system makes it easier to return to prior research and connect learning with future work.',
     },
   },
   {
     id: 'restaurant-micro-moment',
     category: 'AI & Interaction',
-    name: 'Restaurant Micro-moment Recommendation',
-    summary: 'Context-aware Systems · Personalization · User Behavior',
-    tags: ['Context-aware System', 'Personalization', 'User Behavior'],
+    name: 'Restaurant Micro-Moment Recommendation',
+    summary: 'Context-aware recommendation concept shaped around user intent and timing.',
+    tags: ['Context-aware Systems', 'Personalization', 'UX Research', 'Behavior Modeling'],
     image: '/images/micro-moment.png',
     github: 'https://github.com/huiyutseng/restaurant-micro-moment',
     demo: undefined,
     detail: {
       problem:
-        '使用者在不同情境下對餐廳的需求差異很大，傳統推薦系統難以捕捉當下的微小訊號。',
+        'Restaurant choice is rarely only about food. Mood, distance, budget, weather, social context, and urgency all shape what feels like the right recommendation.',
       approach:
-        '設計情境感知的推薦邏輯，結合時間、天氣與過往行為，動態調整推薦權重。',
+        'I mapped common dining micro-moments, translated them into recommendation signals, and explored how an interface could explain suggestions without feeling mechanical.',
       result:
-        '推薦結果更貼近使用者當下情境，點擊與採用率相較靜態推薦有明顯提升。',
+        'The work frames recommendation as a human-context problem, connecting data signals with a more understandable and timely decision experience.',
     },
   },
   {
-    id: 'ai-interaction-placeholder-1',
+    id: 'ai-companion-interface',
     category: 'AI & Interaction',
-    name: 'TODO：專案名稱',
-    summary: 'TODO：一行技術／簡介摘要',
-    tags: ['TODO'],
+    name: 'AI Companion Interface',
+    summary: 'Interaction study for making AI responses feel clearer, calmer, and more context-aware.',
+    tags: ['AI UX', 'Conversation Design', 'Prototype'],
     image: '/images/ai-interaction-placeholder-1.png',
     github: undefined,
     demo: undefined,
     detail: {
-      problem: 'TODO：這個專案想解決什麼問題？',
-      approach: 'TODO：採取了什麼做法或技術？',
-      result: 'TODO：最後達成了什麼成果？',
+      problem:
+        'AI tools can be powerful but difficult to trust when the interface does not explain context, confidence, or next steps well.',
+      approach:
+        'I explored prompt states, response summaries, and action choices that help the user understand what the AI is doing.',
+      result:
+        'The prototype direction focuses on a more transparent AI workflow, where the user stays oriented instead of just receiving output.',
     },
   },
   {
-    id: 'ai-interaction-placeholder-2',
+    id: 'micro-moment-field-notes',
     category: 'AI & Interaction',
-    name: 'TODO：專案名稱',
-    summary: 'TODO：一行技術／簡介摘要',
-    tags: ['TODO'],
+    name: 'Micro-Moment Field Notes',
+    summary: 'A research format for capturing tiny behavioral moments before turning them into product signals.',
+    tags: ['UX Research', 'Behavior', 'Field Notes'],
     image: '/images/ai-interaction-placeholder-2.png',
     github: undefined,
     demo: undefined,
     detail: {
-      problem: 'TODO：這個專案想解決什麼問題？',
-      approach: 'TODO：採取了什麼做法或技術？',
-      result: 'TODO：最後達成了什麼成果？',
+      problem:
+        'Small moments of hesitation, preference, and context are easy to lose when research is summarized too quickly.',
+      approach:
+        'I shaped a note-taking structure that captures trigger, emotion, constraint, and possible design opportunity.',
+      result:
+        'The format keeps qualitative observations useful for later product thinking and AI-assisted pattern discovery.',
     },
   },
   {
-    id: 'ai-interaction-placeholder-3',
+    id: 'recommendation-explainer',
     category: 'AI & Interaction',
-    name: 'TODO：專案名稱',
-    summary: 'TODO：一行技術／簡介摘要',
-    tags: ['TODO'],
+    name: 'Recommendation Explainer',
+    summary: 'A UI concept for showing why a recommendation appears without making the interface heavy.',
+    tags: ['Explainable AI', 'Personalization', 'UI Design'],
     image: '/images/ai-interaction-placeholder-3.png',
     github: undefined,
     demo: undefined,
     detail: {
-      problem: 'TODO：這個專案想解決什麼問題？',
-      approach: 'TODO：採取了什麼做法或技術？',
-      result: 'TODO：最後達成了什麼成果？',
+      problem:
+        'Recommendations can feel random when users cannot see which signals influenced the result.',
+      approach:
+        'I tested lightweight explanation patterns such as short reason tags, confidence cues, and editable preference chips.',
+      result:
+        'The concept helps recommendations feel more understandable while keeping the main decision flow simple.',
     },
   },
   {
-    id: 'ai-interaction-placeholder-4',
+    id: 'context-aware-planner',
     category: 'AI & Interaction',
-    name: 'TODO：專案名稱',
-    summary: 'TODO：一行技術／簡介摘要',
-    tags: ['TODO'],
+    name: 'Context-Aware Planner',
+    summary: 'Planning prototype that adapts suggestions based on energy, time, and task type.',
+    tags: ['Planning', 'Context-aware UX', 'AI Assistant'],
     image: '/images/ai-interaction-placeholder-4.png',
     github: undefined,
     demo: undefined,
     detail: {
-      problem: 'TODO：這個專案想解決什麼問題？',
-      approach: 'TODO：採取了什麼做法或技術？',
-      result: 'TODO：最後達成了什麼成果？',
+      problem:
+        'Task planners usually treat every item equally, even though people make plans based on energy, urgency, and available focus.',
+      approach:
+        'I sketched an assistant that weighs task context and offers different planning modes for deep work, errands, and recovery time.',
+      result:
+        'The prototype direction makes planning feel more humane by adapting structure to the user rather than forcing one rigid list.',
     },
   },
   {
     id: 'ai-3d-workflow',
     category: 'Creative Experiments',
-    name: 'AI-assisted 3D Workflow',
-    summary: 'Blender · ComfyUI · Generative AI',
-    tags: ['Blender', 'ComfyUI', 'Generative AI'],
+    name: 'AI-Assisted 3D Workflow',
+    summary: 'A creative production workflow combining Blender, ComfyUI, and generative AI.',
+    tags: ['Blender', 'ComfyUI', 'Generative AI', 'Workflow Design'],
     image: '/images/ai-3d-workflow.png',
     github: 'https://github.com/huiyutseng/ai-3d-workflow',
     demo: undefined,
     detail: {
-      problem: '傳統 3D 場景製作耗時，難以快速嘗試不同的氛圍與美術風格。',
+      problem:
+        '3D production can be slow when visual exploration, asset iteration, and final rendering are treated as separate steps.',
       approach:
-        '結合 Blender 建模流程與 ComfyUI 生成式管線，讓風格探索與細節生成並行進行。',
-      result: '大幅縮短概念驗證的時間，能在同一天內產出多組風格化的場景提案。',
+        'I experimented with a workflow that uses Blender for structure and ComfyUI for generative exploration, keeping the process flexible while preserving artistic control.',
+      result:
+        'The workflow reduces friction between ideation and production, making it easier to test visual directions before committing to detailed modeling.',
     },
   },
   {
-    id: 'creative-experiments-placeholder-1',
+    id: 'generative-poster-lab',
     category: 'Creative Experiments',
-    name: 'TODO：專案名稱',
-    summary: 'TODO：一行技術／簡介摘要',
-    tags: ['TODO'],
+    name: 'Generative Poster Lab',
+    summary: 'Visual experiment combining typography, procedural layouts, and AI-generated texture.',
+    tags: ['Generative Design', 'Typography', 'Creative Coding'],
     image: '/images/creative-experiments-placeholder-1.png',
     github: undefined,
     demo: undefined,
     detail: {
-      problem: 'TODO：這個專案想解決什麼問題？',
-      approach: 'TODO：採取了什麼做法或技術？',
-      result: 'TODO：最後達成了什麼成果？',
+      problem:
+        'Creative tools often separate layout exploration from texture and atmosphere, slowing down early visual experiments.',
+      approach:
+        'I explored a poster workflow where grid rules and generative textures can be adjusted together.',
+      result:
+        'The experiment creates a faster path from mood to composition while keeping typography legible and intentional.',
     },
   },
   {
-    id: 'creative-experiments-placeholder-2',
+    id: 'ambient-portfolio-motion',
     category: 'Creative Experiments',
-    name: 'TODO：專案名稱',
-    summary: 'TODO：一行技術／簡介摘要',
-    tags: ['TODO'],
+    name: 'Ambient Portfolio Motion',
+    summary: 'Motion system using scroll, stars, and soft botanical details to create depth.',
+    tags: ['Motion Design', 'Framer Motion', 'Interaction'],
     image: '/images/creative-experiments-placeholder-2.png',
     github: undefined,
     demo: undefined,
     detail: {
-      problem: 'TODO：這個專案想解決什麼問題？',
-      approach: 'TODO：採取了什麼做法或技術？',
-      result: 'TODO：最後達成了什麼成果？',
+      problem:
+        'Decorative motion can easily distract from portfolio content when scale, speed, and layering are not carefully controlled.',
+      approach:
+        'I designed subtle scroll-linked elements that support the atmosphere while staying behind the main text and cards.',
+      result:
+        'The motion language gives the page personality without making the content harder to read.',
     },
   },
   {
-    id: 'creative-experiments-placeholder-3',
+    id: 'digital-garden-study',
     category: 'Creative Experiments',
-    name: 'TODO：專案名稱',
-    summary: 'TODO：一行技術／簡介摘要',
-    tags: ['TODO'],
+    name: 'Digital Garden Study',
+    summary: 'A visual system for connecting notes, projects, and personal growth over time.',
+    tags: ['Digital Garden', 'Visual System', 'Storytelling'],
     image: '/images/creative-experiments-placeholder-3.png',
     github: undefined,
     demo: undefined,
     detail: {
-      problem: 'TODO：這個專案想解決什麼問題？',
-      approach: 'TODO：採取了什麼做法或技術？',
-      result: 'TODO：最後達成了什麼成果？',
+      problem:
+        'Personal websites can become static resumes, missing the evolving connections between interests and experiments.',
+      approach:
+        'I explored a garden-like metaphor that lets projects, notes, and milestones feel connected without becoming cluttered.',
+      result:
+        'The study points toward a portfolio that can grow naturally as new ideas and works are added.',
     },
   },
   {
-    id: 'creative-experiments-placeholder-4',
+    id: 'interactive-mood-scene',
     category: 'Creative Experiments',
-    name: 'TODO：專案名稱',
-    summary: 'TODO：一行技術／簡介摘要',
-    tags: ['TODO'],
+    name: 'Interactive Mood Scene',
+    summary: 'A small atmospheric scene that responds to scrolling and pointer movement.',
+    tags: ['Interactive Scene', 'CSS Motion', 'Atmosphere'],
     image: '/images/creative-experiments-placeholder-4.png',
     github: undefined,
     demo: undefined,
     detail: {
-      problem: 'TODO：這個專案想解決什麼問題？',
-      approach: 'TODO：採取了什麼做法或技術？',
-      result: 'TODO：最後達成了什麼成果？',
+      problem:
+        'A personal page should feel memorable, but not at the cost of clarity or performance.',
+      approach:
+        'I tested lightweight interaction patterns using CSS and motion libraries instead of heavy visual assets.',
+      result:
+        'The scene adds a sense of presence while keeping the page accessible and fast to browse.',
     },
   },
 ]

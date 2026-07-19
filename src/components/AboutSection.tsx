@@ -5,6 +5,7 @@ import { fadeUpInView } from '../lib/motion'
 import FloralDecoration from './FloralDecoration'
 import FloatingParticles from './FloatingParticles'
 import ParallaxLayer from './ParallaxLayer'
+import ScrollFlower from './ScrollFlower'
 
 const ICONS: Record<string, LucideIcon> = { Eye, Brain, Sprout }
 
@@ -12,24 +13,21 @@ export default function AboutSection() {
   const reduceMotion = Boolean(useReducedMotion())
 
   return (
-    <section id="about" className="relative overflow-hidden bg-navy-deep px-5 py-24 sm:px-8 lg:py-32">
+    <section id="about" className="relative min-h-screen overflow-hidden bg-navy-deep px-5 py-24 sm:px-8 lg:py-32">
       <ParallaxLayer offset={40} className="pointer-events-none absolute inset-0">
-        <FloatingParticles count={16} className="absolute inset-0" />
+        <FloatingParticles count={34} className="absolute inset-0" interactive />
       </ParallaxLayer>
-      <div className="relative mx-auto max-w-5xl">
+      <div className="relative z-10 mx-auto max-w-5xl">
         <motion.div
           {...fadeUpInView(0, reduceMotion)}
           className="relative overflow-hidden rounded-[20px] border border-gold/25 bg-cream px-6 py-14 shadow-[0_30px_70px_-30px_rgba(4,16,31,0.6)] sm:px-12 lg:px-16"
         >
-          <FloralDecoration
-            tone="lavender"
-            className="pointer-events-none absolute -left-4 -top-4 h-24 w-24 opacity-80 sm:h-32 sm:w-32"
-          />
-          <FloralDecoration
-            tone="lavender"
-            flip
-            className="pointer-events-none absolute -bottom-6 -right-4 h-24 w-24 opacity-80 sm:h-32 sm:w-32"
-          />
+          <ScrollFlower origin="top" className="pointer-events-none absolute -left-4 -top-4 h-24 w-24 opacity-80 sm:h-32 sm:w-32">
+            <FloralDecoration tone="lavender" className="h-full w-full" />
+          </ScrollFlower>
+          <ScrollFlower origin="bottom" className="pointer-events-none absolute -bottom-6 -right-4 h-24 w-24 opacity-80 sm:h-32 sm:w-32">
+            <FloralDecoration tone="lavender" flip className="h-full w-full" />
+          </ScrollFlower>
 
           <div className="relative text-center">
             <h2 className="font-serif-en text-4xl font-medium text-ink-light sm:text-5xl">{site.about.title}</h2>

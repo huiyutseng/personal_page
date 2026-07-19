@@ -5,8 +5,11 @@ import { featuredProject } from '../data/projects'
 import { site } from '../data/site'
 import { fadeUpInView } from '../lib/motion'
 import FloatingParticles from './FloatingParticles'
+import FloralDecoration from './FloralDecoration'
 import ImageWithFallback from './ImageWithFallback'
 import ParallaxLayer from './ParallaxLayer'
+import ScrollFlower from './ScrollFlower'
+import ScrollPlanet from './ScrollPlanet'
 
 const BLOCKS = [
   { key: 'problem', label: 'The Problem', icon: CircleHelp } as const,
@@ -20,9 +23,13 @@ export default function FeaturedProjectSection() {
   return (
     <section className="relative overflow-hidden bg-navy-black px-5 py-24 sm:px-8 lg:py-32">
       <ParallaxLayer offset={40} className="pointer-events-none absolute inset-0">
-        <FloatingParticles count={16} className="absolute inset-0" />
+        <FloatingParticles count={34} className="absolute inset-0" interactive />
       </ParallaxLayer>
-      <div className="relative mx-auto max-w-6xl">
+      <ScrollPlanet tone="gold" size={44} xRange={[4, 22]} yRange={[4, 88]} />
+      <ScrollFlower origin="top" className="pointer-events-none absolute -right-6 top-8 h-28 w-28 opacity-55">
+        <FloralDecoration tone="gold" flip className="h-full w-full" />
+      </ScrollFlower>
+      <div className="relative z-10 mx-auto max-w-6xl">
         <motion.div
           {...fadeUpInView(0, reduceMotion)}
           className="grid grid-cols-1 gap-10 rounded-[20px] border border-gold/20 bg-cream p-6 shadow-[0_30px_70px_-30px_rgba(4,16,31,0.6)] sm:p-10 lg:grid-cols-2 lg:gap-14 lg:p-14"

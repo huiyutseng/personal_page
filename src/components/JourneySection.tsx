@@ -4,7 +4,10 @@ import { journey } from '../data/journey'
 import { site } from '../data/site'
 import { fadeUpInView } from '../lib/motion'
 import FloatingParticles from './FloatingParticles'
+import FloralDecoration from './FloralDecoration'
 import ParallaxLayer from './ParallaxLayer'
+import ScrollFlower from './ScrollFlower'
+import ScrollPlanet from './ScrollPlanet'
 
 const ICONS: Record<string, LucideIcon> = {
   ShieldCheck,
@@ -22,10 +25,14 @@ export default function JourneySection() {
     <section id="journey" className="relative overflow-hidden bg-navy-deep px-5 py-24 sm:px-8 lg:py-32">
       <ParallaxLayer offset={40} className="pointer-events-none absolute inset-0">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_40%_at_50%_0%,rgba(216,180,106,0.08),transparent)]" />
-        <FloatingParticles count={16} className="absolute inset-0" />
+        <FloatingParticles count={42} className="absolute inset-0" interactive />
       </ParallaxLayer>
+      <ScrollPlanet tone="lavender" size={40} xRange={[92, 78, 68]} yRange={[18, 64, 118]} scaleRange={[0.75, 0.92, 0.35]} />
+      <ScrollFlower origin="bottom" className="pointer-events-none absolute -left-6 bottom-4 h-28 w-28 opacity-60">
+        <FloralDecoration tone="lavender" className="h-full w-full" />
+      </ScrollFlower>
 
-      <div className="relative mx-auto max-w-6xl">
+      <div className="relative z-10 mx-auto max-w-6xl">
         <motion.div {...fadeUpInView(0, reduceMotion)} className="text-center">
           <h2 className="font-serif-en text-4xl font-medium text-ink-dark sm:text-5xl">{site.journey.title}</h2>
           <div className="mx-auto mt-3 h-px w-16 bg-gold" />

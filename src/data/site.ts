@@ -1,9 +1,9 @@
-// Central place for all copy + contact info + asset paths.
-// Update the values below to personalize the site — no component edits needed.
+// Central place for all copy, contact info, and asset paths.
+// Update values here to personalize the site without editing components.
 
 export const site = {
-  brand: 'Huiyu Personal Page',
-  brandZh: '微光訊號花園',
+  brand: 'Huiyu Tseng',
+  brandZh: '曾慧瑜',
 
   nav: [
     { id: 'home', label: 'Home' },
@@ -16,17 +16,15 @@ export const site = {
   hero: {
     greeting: "Hi, I'm",
     name: 'Huiyu',
-    tagline: ['I explore the small signals', 'between people, data, and technology.'],
+    tagline: ['I connect human behavior, data, and technology', 'to design clearer digital experiences.'],
     taglineZh: [
-      '我觀察那些容易被忽略的微小訊號，',
-      '並用資料、設計與科技，',
-      '將它們轉化為有意義的體驗。',
+      '我關注人們在日常選擇裡留下的小訊號，',
+      '用資料分析與互動設計，把模糊的感受整理成可行的洞察。',
     ],
     ctaPrimary: 'Explore My Projects',
     ctaSecondary: 'Get to Know Me',
     sideNote: ['Every', 'micro-moment', 'leaves a signal.'],
     scrollHint: 'Scroll to explore',
-    // Drop a real portrait at this path to replace the placeholder frame.
     portraitImage: '/images/profile.jpg',
   },
 
@@ -37,44 +35,42 @@ export const site = {
       {
         icon: 'Eye' as const,
         title: 'What I Notice',
-        body: '我觀察人與系統之間\n微小的互動與變化，\n那些容易被忽略的細節。',
+        body: 'I notice the quiet context behind decisions: timing, emotion, constraints, and the small behaviors people rarely explain out loud.',
       },
       {
         icon: 'Brain' as const,
         title: 'How I Think',
-        body: '我喜歡拆解問題、連結脈絡，\n用資料與邏輯找到背後的\n模式與意義。',
+        body: 'I move between systems thinking and storytelling. I like turning messy observations into patterns, hypotheses, and product directions.',
       },
       {
         icon: 'Sprout' as const,
         title: 'What I Build',
-        body: '我透過程式、設計與創意，\n將想法實際落地，\n創造有價值的體驗與作品。',
+        body: 'I build data products, AI-assisted workflows, and interactive prototypes that make information easier to feel, compare, and act on.',
       },
     ],
   },
 
   projects: {
     title: 'Projects',
-    subtitle: 'Selected works',
+    subtitle: 'Selected works across data, AI, and creative systems.',
     viewAll: 'View Project Details',
   },
 
   journey: {
     title: 'My Journey',
-    subtitle: 'A path of curiosity and growth.',
+    subtitle: 'A path of finance, systems, data, and curiosity.',
   },
 
   contact: {
     title: "Let's Connect",
-    subtitle: "I'd love to hear from you!",
+    subtitle: 'Open to collaboration, internships, and thoughtful product conversations.',
     email: 'huiyu.work@gmail.com',
-    github: 'github.com/Huiyu',
-    githubUrl: 'https://github.com/Huiyu',
+    github: 'github.com/huiyutseng',
+    githubUrl: 'https://github.com/huiyutseng',
     linkedin: 'linkedin.com/in/huiyu',
     linkedinUrl: 'https://www.linkedin.com/in/huiyu',
     resumeLabel: 'Download Resume',
-    // Drop the real PDF at public/resume/resume.pdf to make this link live.
     resumePath: '/resume/resume.pdf',
     devicePreviewImage: '/images/device-preview.png',
   },
-
 } as const

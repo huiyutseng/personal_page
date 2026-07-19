@@ -6,6 +6,7 @@ import FeaturedProjectSection from '../components/FeaturedProjectSection'
 import HeroSection from '../components/HeroSection'
 import JourneySection from '../components/JourneySection'
 import ProjectsSection from '../components/ProjectsSection'
+import SilverTransitionOrb from '../components/SilverTransitionOrb'
 
 export default function Home() {
   const { hash } = useLocation()
@@ -23,6 +24,7 @@ export default function Home() {
   return (
     <main>
       <HeroSection />
+      <SilverTransitionOrb />
       <AboutSection />
       <ProjectsSection />
       <JourneySection />

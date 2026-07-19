@@ -7,6 +7,7 @@ import FloralDecoration from './FloralDecoration'
 import ImageWithFallback from './ImageWithFallback'
 import MagneticButton from './MagneticButton'
 import ParallaxLayer from './ParallaxLayer'
+import ScrollFlower from './ScrollFlower'
 
 export default function HeroSection() {
   const reduceMotion = useReducedMotion()
@@ -15,7 +16,7 @@ export default function HeroSection() {
   return (
     <section
       id="home"
-      className="relative flex min-h-[92vh] items-center overflow-hidden bg-navy-deep pt-36"
+      className="relative z-10 flex min-h-screen items-center overflow-hidden bg-navy-deep pt-36"
     >
       {/* ambient background — drifts slightly on scroll for a sense of depth */}
       <ParallaxLayer offset={50} className="pointer-events-none absolute inset-0">
@@ -31,15 +32,15 @@ export default function HeroSection() {
             opacity="0.35"
           />
         </svg>
-        <FloralDecoration tone="lavender" className="absolute -left-6 bottom-0 h-56 w-56 opacity-70" />
-        <FloralDecoration
-          tone="gold"
-          flip
-          className="absolute right-0 top-16 hidden h-44 w-44 opacity-50 md:block"
-        />
+        <ScrollFlower origin="bottom left" rotate={22} scaleRange={[0.88, 1.04]} className="absolute -left-8 bottom-0 h-56 w-40 opacity-58">
+          <FloralDecoration tone="lavender" variant="wildVine" className="h-full w-full" />
+        </ScrollFlower>
+        <ScrollFlower origin="top right" rotate={-24} scaleRange={[0.94, 1.12]} className="absolute right-2 top-20 hidden h-40 w-40 opacity-42 md:block">
+          <FloralDecoration tone="gold" flip className="h-full w-full" />
+        </ScrollFlower>
       </ParallaxLayer>
 
-      <div className="relative mx-auto grid w-full max-w-6xl grid-cols-1 items-center gap-14 px-5 sm:px-8 lg:grid-cols-[1.05fr_0.95fr] lg:gap-10">
+      <div className="relative z-10 mx-auto grid w-full max-w-6xl grid-cols-1 items-center gap-14 px-5 sm:px-8 lg:grid-cols-[1.05fr_0.95fr] lg:gap-10">
         {/* left column */}
         <div className="text-center lg:text-left">
           <motion.p {...fadeUp(0)} className="font-serif-en text-lg italic text-lavender">
@@ -113,15 +114,12 @@ export default function HeroSection() {
                 icon={<Sparkles className="h-10 w-10 text-lavender/70" strokeWidth={1} />}
               />
             </div>
-            <FloralDecoration
-              tone="lavender"
-              className="pointer-events-none absolute -bottom-8 -left-10 h-32 w-32"
-            />
-            <FloralDecoration
-              tone="gold"
-              flip
-              className="pointer-events-none absolute -right-8 -top-6 h-28 w-28"
-            />
+            <ScrollFlower origin="bottom left" rotate={-16} scaleRange={[0.92, 1.04]} className="pointer-events-none absolute -bottom-10 -left-12 h-32 w-24 opacity-82">
+              <FloralDecoration tone="lavender" variant="sprig" className="h-full w-full" />
+            </ScrollFlower>
+            <ScrollFlower origin="top right" rotate={-33} scaleRange={[0.88, 1.05]} className="pointer-events-none absolute -right-8 -top-6 h-24 w-24 opacity-90">
+              <FloralDecoration tone="gold" flip className="h-full w-full" />
+            </ScrollFlower>
             {[0.15, 0.55, 0.85].map((t, i) => (
               <span
                 key={i}
