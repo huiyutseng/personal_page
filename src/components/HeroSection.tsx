@@ -1,7 +1,9 @@
 import { motion, useReducedMotion } from 'framer-motion'
 import { ChevronDown, Sparkles } from 'lucide-react'
+import { useRef } from 'react'
 import { site } from '../data/site'
 import { fadeUp as fadeUpBase } from '../lib/motion'
+import CounterRotatingRings from './CounterRotatingRings'
 import FloatingParticles from './FloatingParticles'
 import FloralDecoration from './FloralDecoration'
 import ImageWithFallback from './ImageWithFallback'
@@ -10,11 +12,13 @@ import ParallaxLayer from './ParallaxLayer'
 import ScrollFlower from './ScrollFlower'
 
 export default function HeroSection() {
+  const sectionRef = useRef<HTMLElement>(null)
   const reduceMotion = useReducedMotion()
   const fadeUp = (delay: number) => fadeUpBase(delay, Boolean(reduceMotion))
 
   return (
     <section
+      ref={sectionRef}
       id="home"
       className="relative z-10 flex min-h-screen items-center overflow-hidden bg-navy-deep pt-36"
     >
@@ -103,8 +107,7 @@ export default function HeroSection() {
         {/* right column — portrait */}
         <motion.div {...fadeUp(0.2)} className="relative mx-auto flex w-full max-w-sm items-center justify-center lg:max-w-none">
           <div className="relative aspect-square w-full max-w-[360px]">
-            <span className="absolute inset-[-14px] rounded-full border border-dashed border-gold/40" />
-            <span className="absolute inset-[-4px] rounded-full border border-gold/70" />
+            <CounterRotatingRings scrollTarget={sectionRef} />
             <div className="absolute inset-0 overflow-hidden rounded-full shadow-[0_0_60px_-10px_rgba(184,167,217,0.45)]">
               <ImageWithFallback
                 src={site.hero.portraitImage}
