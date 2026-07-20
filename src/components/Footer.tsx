@@ -1,10 +1,12 @@
 import { Sparkles } from 'lucide-react'
-import { site, siteShared } from '../data/site'
 import { useLanguage } from '../i18n/LanguageContext'
+import { usePortfolio } from '../portfolio/PortfolioContext'
 
 export default function Footer() {
   const { locale } = useLanguage()
-  const copy = site[locale]
+  const { data } = usePortfolio()
+  const copy = data.content[locale]
+  const siteShared = data.site
   return (
     <footer className="border-t border-gold/10 bg-navy-black px-5 py-10 text-center sm:px-8">
       <div className="mx-auto flex max-w-6xl flex-col items-center gap-3">

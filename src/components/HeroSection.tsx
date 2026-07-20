@@ -1,9 +1,9 @@
 import { motion, useReducedMotion } from 'framer-motion'
 import { ChevronDown, Sparkles } from 'lucide-react'
 import { useRef } from 'react'
-import { site, siteShared } from '../data/site'
 import { useLanguage } from '../i18n/LanguageContext'
 import { fadeUp as fadeUpBase } from '../lib/motion'
+import { usePortfolio } from '../portfolio/PortfolioContext'
 import CounterRotatingRings from './CounterRotatingRings'
 import FloatingParticles from './FloatingParticles'
 import FloralDecoration from './FloralDecoration'
@@ -15,7 +15,9 @@ import ScrollFlower from './ScrollFlower'
 export default function HeroSection() {
   const sectionRef = useRef<HTMLElement>(null)
   const { locale } = useLanguage()
-  const copy = site[locale]
+  const { data } = usePortfolio()
+  const copy = data.content[locale]
+  const siteShared = data.site
   const reduceMotion = useReducedMotion()
   const fadeUp = (delay: number) => fadeUpBase(delay, Boolean(reduceMotion))
 

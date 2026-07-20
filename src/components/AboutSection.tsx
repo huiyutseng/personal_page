@@ -1,8 +1,8 @@
 import { motion, useReducedMotion } from 'framer-motion'
 import { Brain, Eye, Sprout, type LucideIcon } from 'lucide-react'
-import { site } from '../data/site'
 import { useLanguage } from '../i18n/LanguageContext'
 import { fadeUpInView } from '../lib/motion'
+import { usePortfolio } from '../portfolio/PortfolioContext'
 import FloralDecoration from './FloralDecoration'
 import FloatingParticles from './FloatingParticles'
 import ParallaxLayer from './ParallaxLayer'
@@ -12,7 +12,8 @@ const ICONS: Record<string, LucideIcon> = { Eye, Brain, Sprout }
 
 export default function AboutSection() {
   const { locale } = useLanguage()
-  const copy = site[locale]
+  const { data } = usePortfolio()
+  const copy = data.content[locale]
   const reduceMotion = Boolean(useReducedMotion())
 
   return (

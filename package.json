@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "preview": "vite preview",
-    "test": "node --test test/bilingual-navigation.test.ts test/counter-rotating-rings.test.mjs",
+    "test": "node --test test/bilingual-navigation.test.ts test/counter-rotating-rings.test.mjs test/portfolio-schema.test.ts test/portfolio-theme.test.ts",
     "typecheck": "tsc -b"
   },
   "devDependencies": {

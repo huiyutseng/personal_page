@@ -1,9 +1,9 @@
 import { motion, useReducedMotion } from 'framer-motion'
 import { BrainCircuit, GraduationCap, Landmark, Globe2, ShieldCheck, Sparkles, type LucideIcon } from 'lucide-react'
-import { journey, localizeJourney } from '../data/journey'
-import { site } from '../data/site'
 import { useLanguage } from '../i18n/LanguageContext'
 import { fadeUpInView } from '../lib/motion'
+import { usePortfolio } from '../portfolio/PortfolioContext'
+import { getLocalizedJourney } from '../portfolio/selectors'
 import FloatingParticles from './FloatingParticles'
 import FloralDecoration from './FloralDecoration'
 import ParallaxLayer from './ParallaxLayer'
@@ -20,8 +20,9 @@ const ICONS: Record<string, LucideIcon> = {
 
 export default function JourneySection() {
   const { locale } = useLanguage()
-  const copy = site[locale]
-  const milestones = journey.map((item) => localizeJourney(item, locale))
+  const { data } = usePortfolio()
+  const copy = data.content[locale]
+  const milestones = getLocalizedJourney(data, locale)
   const reduceMotion = Boolean(useReducedMotion())
   const n = milestones.length
 

@@ -1,10 +1,11 @@
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
-import { PROJECT_CATEGORIES, categoryLabels, getLocalizedProjects } from '../data/projects'
-import { site } from '../data/site'
+import { PROJECT_CATEGORIES, categoryLabels } from '../data/projects'
 import type { ProjectCategory } from '../data/types'
 import { useLanguage } from '../i18n/LanguageContext'
 import { fadeUpInView } from '../lib/motion'
+import { usePortfolio } from '../portfolio/PortfolioContext'
+import { getLocalizedProjects } from '../portfolio/selectors'
 import ProjectCard from './ProjectCard'
 import FloatingParticles from './FloatingParticles'
 import FloralDecoration from './FloralDecoration'
@@ -15,8 +16,9 @@ const clamp = (value: number, min: number, max: number) => Math.min(Math.max(val
 
 export default function ProjectsSection() {
   const { locale } = useLanguage()
-  const copy = site[locale]
-  const projects = getLocalizedProjects(locale)
+  const { data } = usePortfolio()
+  const copy = data.content[locale]
+  const projects = getLocalizedProjects(data, locale)
   const reduceMotion = Boolean(useReducedMotion())
   const [active, setActive] = useState<ProjectCategory>(PROJECT_CATEGORIES[0])
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)

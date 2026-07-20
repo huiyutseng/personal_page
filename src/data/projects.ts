@@ -439,7 +439,7 @@ export const categoryLabels: Record<Locale, Record<ProjectCategory, string>> = {
   },
 }
 
-const chineseTagLabels: Record<string, string> = {
+export const chineseTagLabels: Record<string, string> = {
   Streamlit: 'Streamlit',
   Python: 'Python',
   NLP: 'NLP',

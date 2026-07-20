@@ -1,14 +1,15 @@
 import { motion } from 'framer-motion'
 import { ArrowUpRight, Sparkles } from 'lucide-react'
 import { Link } from 'react-router-dom'
-import { site } from '../data/site'
 import type { LocalizedProject } from '../data/types'
 import { useLanguage } from '../i18n/LanguageContext'
+import { usePortfolio } from '../portfolio/PortfolioContext'
 import ImageWithFallback from './ImageWithFallback'
 
 export default function ProjectCard({ project }: { project: LocalizedProject }) {
   const { locale } = useLanguage()
-  const copy = site[locale]
+  const { data } = usePortfolio()
+  const copy = data.content[locale]
   return (
     <motion.div layout className="group relative h-full">
       <Link

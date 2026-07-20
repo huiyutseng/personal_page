@@ -13,16 +13,18 @@ import { useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import ImageWithFallback from '../components/ImageWithFallback'
 import ProjectCard from '../components/ProjectCard'
-import { localizeProject, projects } from '../data/projects'
-import { site } from '../data/site'
 import { useLanguage } from '../i18n/LanguageContext'
 import { fadeUpInView } from '../lib/motion'
 import { getProjectNavigation } from '../lib/projectNavigation'
+import { usePortfolio } from '../portfolio/PortfolioContext'
+import { localizeProject } from '../portfolio/selectors'
 
 export default function ProjectDetail() {
   const { id } = useParams()
   const { locale } = useLanguage()
-  const copy = site[locale]
+  const { data } = usePortfolio()
+  const copy = data.content[locale]
+  const projects = data.projects
   const projectSource = projects.find((project) => project.id === id)
   const navigation = id ? getProjectNavigation(projects, id) : null
   const reduceMotion = Boolean(useReducedMotion())

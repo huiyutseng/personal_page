@@ -2,9 +2,9 @@ import { motion } from 'framer-motion'
 import { Menu, Sparkles, X } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { site, siteShared } from '../data/site'
 import { useLanguage } from '../i18n/LanguageContext'
 import type { Locale } from '../i18n/types'
+import { usePortfolio } from '../portfolio/PortfolioContext'
 
 function LanguageToggle({
   locale,
@@ -47,7 +47,9 @@ function LanguageToggle({
 
 export default function Navbar() {
   const { locale, setLocale } = useLanguage()
-  const copy = site[locale]
+  const { data } = usePortfolio()
+  const copy = data.content[locale]
+  const siteShared = data.site
   const navigate = useNavigate()
   const location = useLocation()
   const [scrolled, setScrolled] = useState(false)

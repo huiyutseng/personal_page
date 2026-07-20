@@ -23,7 +23,7 @@ export default function ImageWithFallback({
 }: ImageWithFallbackProps) {
   const [failed, setFailed] = useState(false)
 
-  if (failed) {
+  if (failed || !src) {
     return (
       <div
         className={`flex items-center justify-center bg-gradient-to-br from-navy-card via-lavender/35 to-navy-deep ${fallbackClassName || className}`}

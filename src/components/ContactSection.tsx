@@ -1,8 +1,8 @@
 import { motion, useReducedMotion } from 'framer-motion'
 import { Bird, Briefcase, Code2, Download, Mail } from 'lucide-react'
-import { site, siteShared } from '../data/site'
 import { useLanguage } from '../i18n/LanguageContext'
 import { fadeUpInView } from '../lib/motion'
+import { usePortfolio } from '../portfolio/PortfolioContext'
 import FloatingParticles from './FloatingParticles'
 import FloralDecoration from './FloralDecoration'
 import ImageWithFallback from './ImageWithFallback'
@@ -10,12 +10,6 @@ import MagneticButton from './MagneticButton'
 import ParallaxLayer from './ParallaxLayer'
 import ScrollFlower from './ScrollFlower'
 import ScrollPlanet from './ScrollPlanet'
-
-const LINKS = [
-  { icon: Mail, label: siteShared.contact.email, href: `mailto:${siteShared.contact.email}` },
-  { icon: Code2, label: siteShared.contact.github, href: siteShared.contact.githubUrl },
-  { icon: Briefcase, label: siteShared.contact.linkedin, href: siteShared.contact.linkedinUrl },
-]
 
 const DEVICES = [
   { className: 'aspect-[16/10] w-full' },
@@ -25,7 +19,14 @@ const DEVICES = [
 
 export default function ContactSection() {
   const { locale } = useLanguage()
-  const copy = site[locale]
+  const { data } = usePortfolio()
+  const copy = data.content[locale]
+  const siteShared = data.site
+  const links = [
+    { icon: Mail, label: siteShared.contact.email, href: `mailto:${siteShared.contact.email}` },
+    { icon: Code2, label: siteShared.contact.github, href: siteShared.contact.githubUrl },
+    { icon: Briefcase, label: siteShared.contact.linkedin, href: siteShared.contact.linkedinUrl },
+  ]
   const reduceMotion = Boolean(useReducedMotion())
 
   return (
@@ -49,7 +50,7 @@ export default function ContactSection() {
             <p className="mt-3 font-serif-en text-lg italic text-ink-light-soft">{copy.contact.subtitle}</p>
 
             <ul className="mt-8 space-y-4">
-              {LINKS.map(({ icon: Icon, label, href }) => (
+              {links.map(({ icon: Icon, label, href }) => (
                 <li key={label}>
                   <a
                     href={href}

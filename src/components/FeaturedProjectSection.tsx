@@ -1,10 +1,10 @@
 import { motion, useReducedMotion } from 'framer-motion'
 import { ArrowRight, CircleHelp, CircleCheck, Lightbulb } from 'lucide-react'
 import { Link } from 'react-router-dom'
-import { featuredProject, localizeProject } from '../data/projects'
-import { site } from '../data/site'
 import { useLanguage } from '../i18n/LanguageContext'
 import { fadeUpInView } from '../lib/motion'
+import { usePortfolio } from '../portfolio/PortfolioContext'
+import { getFeaturedProject } from '../portfolio/selectors'
 import FloatingParticles from './FloatingParticles'
 import FloralDecoration from './FloralDecoration'
 import ImageWithFallback from './ImageWithFallback'
@@ -14,8 +14,9 @@ import ScrollPlanet from './ScrollPlanet'
 
 export default function FeaturedProjectSection() {
   const { locale } = useLanguage()
-  const copy = site[locale]
-  const project = localizeProject(featuredProject, locale)
+  const { data } = usePortfolio()
+  const copy = data.content[locale]
+  const project = getFeaturedProject(data, locale)
   const blocks = [
     { key: 'problem', label: copy.projectDetail.problem, icon: CircleHelp },
     { key: 'approach', label: copy.projectDetail.approach, icon: Lightbulb },
